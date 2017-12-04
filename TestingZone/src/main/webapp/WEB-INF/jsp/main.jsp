@@ -12,7 +12,7 @@
 <base href="<%=basePath%>">
 
 <title>TestingZone</title>
-<%@ include file="template/js.jsp"%>
+<%@ include file="template/css.jsp"%>
 </head>
 
 <body class="layui-layout-body">
@@ -98,17 +98,24 @@
 		--%>
 		<div class="layui-body">
 			<!-- 内容主体区域 -->
-			<div style="padding: 15px;">内容主体区域</div>
+			<div class="layui-container">
+				<div class="layui-row">
+					<div class="layui-col-md8">
+						<%@ include file="template/content.jsp"%>
+					</div>
+					<div class="layui-col-md4">
+						<%@ include file="template/right.jsp"%>
+					</div>
+				</div>
+			</div>
 		</div>
 
-		<div class="layui-footer">
-			<!-- 底部固定区域 -->
-			© Copyright - Powered By 测试组
-		</div>
+		<%@ include file="template/foot.jsp"%>
 	</div>
+	<%@ include file="template/fixbar.jsp"%>
 	<script>
 		//JavaScript代码区域
-			//var element = layui.element;
+		//var element = layui.element;
 	</script>
 </body>
 </html>
