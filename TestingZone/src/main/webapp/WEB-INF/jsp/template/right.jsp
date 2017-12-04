@@ -4,9 +4,9 @@
 <div class="layui-col-md12 tot-panel">
 	<h2>所有版块</h2>
 	<ul class="tot-panel-main">
-		<li><a href="http://www.layui.com" target="_blank">性能测试</a></li>
-		<li><a href="http://www.thinkphp.cn" target="_blank">自动化测试</a></li>
-		<li><a href="http://www.thinkphp.cn" target="_blank">自动化部署</a></li>
+		<li><a href="performance/content.do" target="_self">性能测试</a></li>
+		<li><a href="auto/content.do" target="_self">自动化测试</a></li>
+		<li><a href="deploy/content.do" target="_self">自动化部署</a></li>
 	</ul>
 </div>
 

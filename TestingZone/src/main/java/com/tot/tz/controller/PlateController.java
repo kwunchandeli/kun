@@ -12,9 +12,21 @@ public class PlateController {
 	
 	
 	@GetMapping("/main.do")
-	public String test( Model model){
+	public String mainPage( Model model){
 		 model.addAttribute("username", "测试用户");
 		return "main";
 	}
 	
+	@GetMapping("/{plate}/content.do")
+	public String plateContent(@PathVariable String plate, Model model){
+		 model.addAttribute("username", "测试用户");
+		return "main";
+	}
+	
+	@GetMapping("/{plate}/{article}/article.do")
+	public String articleContent(@PathVariable String plate,@PathVariable String article, Model model){
+		 model.addAttribute("username", "测试用户");
+		 model.addAttribute("article_name", "在CentOS下搭建自己的Git服务器");
+		return "article";
+	}
 }

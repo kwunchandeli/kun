@@ -11,7 +11,7 @@
 <head>
 <base href="<%=basePath%>">
 
-<title>TestingZone</title>
+<title>${article_name}-TestingZone</title>
 <%@ include file="template/css.jsp"%>
 </head>
 
@@ -28,11 +28,8 @@
 	</div>
 	<div class="layui-container content">
 		<div class="layui-row">
-			<div class="layui-col-md8">
+			<div class="layui-col-md12">
 				<%@ include file="template/content.jsp"%>
-			</div>
-			<div class="layui-col-md4">
-				<%@ include file="template/right.jsp"%>
 			</div>
 		</div>
 		<div class="layui-row">
