@@ -1,6 +1,7 @@
 package com.tot.tz.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -44,13 +45,14 @@ public class PlateController {
 	public String mainPage( @PathVariable int page,HttpServletRequest request,Model model){
 		String ip = IpUtil.getIpAddr(request);
 		logger.info("访问地址:"+ip);  
-		logger.info("访问地址:"+page);  
 		String username = userService.getUsernameByIp(ip);
 		List<Plate> pList = plateService.getPlateList();
 		List<Article> hotArticleList = articleService.getHotArticles();
+		Map<String, Object> contentMap = articleService.getPagingArticles(0, 10, page);
 		model.addAttribute("username", username);
 		model.addAttribute("pList", pList);
 		model.addAttribute("hotArticleList", hotArticleList);
+		model.addAttribute("contentMap", contentMap);
 		return "main";
 	}
 	

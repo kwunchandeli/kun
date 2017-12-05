@@ -1,6 +1,8 @@
 package com.tot.tz.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -27,6 +29,24 @@ public class ArticleServiceImpl implements ArticleService {
 	@Override
 	public List<Article> getHotArticles() {
 		return articleDao.getHotArticles();
+	}
+
+	@Override
+	public Map<String, Object> getPagingArticles(int p_id,int perPage,int page){
+		Map<String, Object> map = new HashMap<String, Object>();
+		int count = articleDao.getCountByPlateid(p_id);
+		if(page>(count/perPage + 1)){
+			page = count/perPage + 1;
+		}
+		if(page<1){
+			page = 1;
+		}
+		List<Article> aList = articleDao.getLimitArticles(p_id, perPage*(page-1), perPage);
+		map.put("count", count);
+		map.put("page", page);
+		map.put("perPage", perPage);
+		map.put("aList", aList);
+		return map;
 	}
 
 

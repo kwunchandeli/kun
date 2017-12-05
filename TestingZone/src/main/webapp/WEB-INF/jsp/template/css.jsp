@@ -30,6 +30,12 @@ body {
 }
 .desc{
 	padding: 10px;
+	-webkit-line-clamp: 2;
+	line-height: 25px;
+	font-size: 14px;
+	text-overflow: ellipsis;
+	height: 70px;
+	overflow: hidden;
 }
 .data{
 	text-align: right;
@@ -81,6 +87,7 @@ li a{
 .content-panel{
 	margin:10px 0;
 	padding: 10px;
+	height: 123px;
 	background-color: #fff;
 	border-bottom: 1px solid #eee;
 }
