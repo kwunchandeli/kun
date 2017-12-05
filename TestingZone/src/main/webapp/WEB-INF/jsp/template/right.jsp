@@ -1,23 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <div class="layui-col-md12 tot-panel">
 	<h2>所有版块</h2>
 	<ul class="tot-panel-main">
-		<li><a href="performance/content.do" target="_self">性能测试</a></li>
-		<li><a href="auto/content.do" target="_self">自动化测试</a></li>
-		<li><a href="deploy/content.do" target="_self">自动化部署</a></li>
+		<!-- <li><a href="plate/performance" target="_self">性能测试</a></li>
+		<li><a href="plate/auto" target="_self">自动化测试</a></li>
+		<li><a href="plate/deploy" target="_self">自动化部署</a></li> -->
+		<c:forEach items="${pList}" var="plate">
+			<li>
+				<a href="plate/${plate.p_id}/1">${plate.p_name}</a>
+			</li>
+		</c:forEach>
 	</ul>
+
 </div>
 
 <div class="layui-col-md12 tot-panel">
 	<h2>热门文章</h2>
 	<ol class="tot-panel-main">
-		<li><a href="/1.html">Linux搭建svn服务器</a></li>
-		<li><a href="/21.html">Linux下搭建Lnmp环境--Mysql安装</a></li>
-		<li><a href="/3.html">thinkphp5.0使用sqlserver数据库</a></li>
-		<li><a href="/14.html">thinkphp5.0实现qq快捷登录</a></li>
-		<li><a href="/20.html">tp5项目如何让nginx支持pathino并且隐藏index.php</a></li>
+		<c:forEach items="${hotArticleList}" var="article">
+			<li><a href="article/${article.a_id}">${article.title}</a></li>
+		</c:forEach>
 	</ol>
 </div>
 

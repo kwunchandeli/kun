@@ -75,6 +75,9 @@ body {
     color: #1AA195;
    /*list-style: decimal-leading-zero inside; */
 }
+li a{
+	text-overflow: ellipsis;
+}
 .content-panel{
 	margin:10px 0;
 	padding: 10px;

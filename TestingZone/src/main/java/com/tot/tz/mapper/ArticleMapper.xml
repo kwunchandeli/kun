@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tot.tz.dao.ArticleDao">
+	<select id="getLimitArticles" resultType="com.tot.tz.entity.Article">
+		SELECT
+		a.a_id AS a_id,
+		a.title AS title,
+		a.content AS content,
+		a.create_time AS create_time,
+		p.p_name AS p_name,
+		a.pv AS pv,
+		u.u_name AS u_name
+		FROM
+		article a,
+		plate p,
+		t_user u
+		WHERE
+		a.p_id = p.p_id
+		AND a.u_id = u.u_id
+		LIMIT 0,
+		5
+	</select>
+	<select id="getHotArticles" resultType="com.tot.tz.entity.Article">
+		SELECT
+			a_id,
+			title,
+			pv,
+			p_id
+		FROM
+			article
+		ORDER BY pv DESC
+		LIMIT 0,5
+	</select>
+</mapper>

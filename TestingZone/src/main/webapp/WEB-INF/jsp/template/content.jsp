@@ -3,15 +3,16 @@
 
 <blockquote class="layui-elem-quote" style="margin-top: 5px;margin-bottom: 0px;">
 	<span class="layui-breadcrumb" style="visibility: visible;"> <a
-		href="main.do"><cite>首页</cite></a> <span class="layui-box">&gt;</span><cite>文章列表</cite>
+		href="main"><cite>首页</cite></a> <span class="layui-box">&gt;</span><cite>文章列表</cite>
 	</span>
 </blockquote>
 
 <ul class="layui-col-md12">
-	<li class="content-panel">
+	
+	<!-- <li class="content-panel">
 		<button class="layui-btn layui-btn-mini layui-btn-warm reprint">原创</button>
 		<h2 class="title">
-			<a href="1/1/article.do">Linux下搭建Lnmp环境--Mysql安装</a>
+			<a href="article/1/1">Linux下搭建Lnmp环境--Mysql安装</a>
 		</h2>
 
 		<div class="desc">MySQL是一个关系型数据库管理系统，由瑞典MySQL AB 公司开发，目前属于
@@ -25,7 +26,7 @@
 	<li class="content-panel">
 		<button class="layui-btn layui-btn-mini layui-btn-warm reprint">原创</button>
 		<h2 class="title">
-			<a href="1/1/article.do">Linux搭建lnmp环境--Nginx安装</a>
+			<a href="article/1/1">Linux搭建lnmp环境--Nginx安装</a>
 		</h2>
 
 		<div class="desc">Nginx (engine x)
@@ -39,7 +40,7 @@
 	<li class="content-panel">
 		<button class="layui-btn layui-btn-mini layui-btn-warm reprint">原创</button>
 		<h2 class="title">
-			<a href="1/1/article.do">Linux下搭建LNMP---PHP安装</a>
+			<a href="article/1/1">Linux下搭建LNMP---PHP安装</a>
 		</h2>
 
 		<div class="desc">
@@ -53,7 +54,7 @@
 	<li class="content-panel">
 		<button class="layui-btn layui-btn-mini layui-btn-warm reprint">原创</button>
 		<h2 class="title">
-			<a href="1/1/article.do">Linux搭建svn服务器</a>
+			<a href="article/1/1">Linux搭建svn服务器</a>
 		</h2>
 
 		<div class="desc">
@@ -63,5 +64,6 @@
 			<span><i class="layui-icon"></i> 16-12-11 01:02</span> <span><i
 				class="layui-icon"></i>管理员</span>
 		</div>
-	</li>
+	</li> -->
 </ul>
+<div id="paging"></div>
