@@ -45,7 +45,7 @@
 
 		//执行
 		util.fixbar({
-			bar1 : '&#xe608',
+			bar1 : '&#xe621',
 			click : function(type) {
 				console.log(type);
 				if (type === 'bar1') {

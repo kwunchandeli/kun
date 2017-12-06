@@ -11,7 +11,7 @@
 <head>
 <base href="<%=basePath%>">
 
-<title>${article_name}-TestingZone</title>
+<title>${article.title}-TestingZone</title>
 <%@ include file="template/css.jsp"%>
 </head>
 
