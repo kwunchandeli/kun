@@ -49,7 +49,8 @@ public class ArticleServiceImpl implements ArticleService {
 		return map;
 	}
 
-
-
-
+	@Override
+	public Article getArticleById(int p_id) {
+		return articleDao.getArticleById(p_id);
+	}
 }

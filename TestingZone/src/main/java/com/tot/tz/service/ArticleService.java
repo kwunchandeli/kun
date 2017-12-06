@@ -9,4 +9,5 @@ public interface ArticleService {
 	public List<Article> getHotArticles();
 	public List<Article> getLimitArticles(int i,int start,int end);
 	public Map<String, Object> getPagingArticles(int p_id,int perPage,int page);
+	public Article getArticleById(int p_id);
 }

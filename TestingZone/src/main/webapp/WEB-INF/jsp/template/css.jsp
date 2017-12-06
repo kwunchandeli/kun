@@ -34,7 +34,7 @@ body {
 	line-height: 25px;
 	font-size: 14px;
 	text-overflow: ellipsis;
-	height: 70px;
+	height: 85px;
 	overflow: hidden;
 }
 .data{
@@ -87,8 +87,25 @@ li a{
 .content-panel{
 	margin:10px 0;
 	padding: 10px;
-	height: 123px;
 	background-color: #fff;
 	border-bottom: 1px solid #eee;
+}
+.center_text{
+	text-align: center;
+}
+.tag{
+	padding: 20px;
+}
+h1{
+	padding: 10px;
+	margin-bottom: 10px;
+}
+p{
+	margin: 12px;
+	font-size: 16px;
+	line-height: 27px;
+}
+.light{
+	background-color: #fff;
 }
 </style>

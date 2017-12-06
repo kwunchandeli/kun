@@ -57,13 +57,16 @@ public class PlateController {
 	}
 	
 	@GetMapping("/plate/{plate}/{page}")
-	public String plateContent(@PathVariable String plate,@PathVariable int page,Model model){
+	public String plateContent(@PathVariable int plate,@PathVariable int page,Model model){
+		Map<String, Object> contentMap = articleService.getPagingArticles(plate, 10, page);
+		model.addAttribute("contentMap", contentMap);
 		return "main";
 	}
 	
-	@GetMapping("/article/{article}")
-	public String articleContent(@PathVariable String article, Model model){
-		 model.addAttribute("article_name", "在CentOS下搭建自己的Git服务器");
+	@GetMapping("/article/{article_id}")
+	public String articleContent(@PathVariable int article_id, Model model){
+		Article article = articleService.getArticleById(article_id);
+		 model.addAttribute("article",article);
 		return "article";
 	}
 }

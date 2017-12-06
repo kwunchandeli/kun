@@ -21,7 +21,7 @@
 	<h2>热门文章</h2>
 	<ol class="tot-panel-main">
 		<c:forEach items="${hotArticleList}" var="article">
-			<li><a href="article/${article.a_id}">${article.title}</a></li>
+			<li><a href="article/${article.a_id}" target="_blank">${article.title}</a></li>
 		</c:forEach>
 	</ol>
 </div>

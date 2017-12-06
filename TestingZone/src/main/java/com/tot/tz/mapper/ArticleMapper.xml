@@ -50,4 +50,22 @@
 				AND a.p_id = #{p_id}
 			</if>
 	</select>
+	<select id="getArticleById" resultType="com.tot.tz.entity.Article">
+		SELECT
+			a.a_id AS a_id,
+			a.title AS title,
+			a.content AS content,
+			a.create_time AS create_time,
+			p.p_name AS p_name,
+			a.pv AS pv,
+			u.u_name AS u_name
+		FROM
+			article a,
+			plate p,
+			t_user u
+		WHERE
+			a.p_id = p.p_id
+			AND a.u_id = u.u_id
+			AND a.a_id = #{a_id}
+	</select>
 </mapper>

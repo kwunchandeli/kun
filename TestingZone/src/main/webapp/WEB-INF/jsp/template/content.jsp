@@ -15,8 +15,9 @@
 	<c:forEach items="${contentMap.aList}" var="article">
 		<li class="content-panel">
 			<h2 class="title">
-				<a href="article/${article.a_id}">${article.title}</a>
+				<a href="article/${article.a_id}" target="_blank">${article.title}</a>
 			</h2>
+			<h2 id="a_id" style="display: none;">${article.a_id}</h2>
 			<div class="desc">${article.content}</div>
 			<div class="data">
 				<span><i class="layui-icon"></i> <fmt:formatDate

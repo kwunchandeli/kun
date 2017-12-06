@@ -10,5 +10,6 @@ public interface ArticleDao {
 	public List<Article> getHotArticles();
 	public List<Article> getLimitArticles(@Param("p_id") int p_id,@Param("start") int start,@Param("end") int end);
 	public int getCountByPlateid(@Param("p_id") int p_id);
+	public Article getArticleById(int a_id);
 
 }
