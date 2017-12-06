@@ -102,8 +102,13 @@ h1{
 }
 p{
 	margin: 12px;
-	font-size: 16px;
-	line-height: 27px;
+	font-size: 15px;
+	line-height: 25px;
+}
+.desc p{
+	margin: 2px;
+	font-size: 12px;
+	line-height: 18px;
 }
 .light{
 	background-color: #fff;
