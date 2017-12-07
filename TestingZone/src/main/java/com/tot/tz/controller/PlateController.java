@@ -69,4 +69,11 @@ public class PlateController {
 		 model.addAttribute("article",article);
 		return "article";
 	}
+	
+	@GetMapping("/article/edit")
+	public String edit( Model model){
+		//Article article = articleService.getArticleById(article_id);
+		// model.addAttribute("article",article);
+		return "edit";
+	}
 }

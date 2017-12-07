@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib prefix='fmt' uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -13,6 +14,13 @@
 
 <title>${article.title}-TestingZone</title>
 <%@ include file="template/css.jsp"%>
+<style>
+@media screen and (min-width: 800px) {
+	.layui-container{
+		width: 750px;
+	}
+}
+</style>
 </head>
 
 <body>
@@ -40,7 +48,8 @@
 					<!-- 加载文章内容 -->
 					<h1 class="center_text">${article.title}</h1>
 					<div class="center_text tag">
-						<span>时间 : ${article.create_time}</span> <span>分类 :
+						<span>时间 : <fmt:formatDate
+						value="${article.create_time}" pattern="yyyy-MM-dd HH:mm:ss" /></span> <span>分类 :
 							${article.p_name}</span> <span>作者 : ${article.u_name}</span> <span>阅读
 							: ${article.pv}</span>
 					</div>

@@ -7,28 +7,33 @@ body {
 	color: #666;
 	background-color: #f5f5f5;
 }
-.fix_header{
+
+.fix_header {
 	height: 60px;
 	background-color: #393D49;
 	color: #009688;
-    border-bottom: 1px solid #404553;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 999;
-} 
-.nav_logo{
+	border-bottom: 1px solid #404553;
+	position: fixed;
+	width: 100%;
+	top: 0;
+	z-index: 999;
+}
+
+.nav_logo {
 	text-align: center;;
 	line-height: 60px;
 }
-.content{
+
+.content {
 	margin-top: 61px;
 }
-.title{
+
+.title {
 	font-size: 16px;
 	margin-left: 20px;
 }
-.desc{
+
+.desc {
 	padding: 10px;
 	-webkit-line-clamp: 2;
 	line-height: 25px;
@@ -37,33 +42,41 @@ body {
 	height: 85px;
 	overflow: hidden;
 }
-.data{
+
+.data {
 	text-align: right;
 	padding-right: 30px;
 }
-.foot{
+
+.foot {
 	text-align: center;
 	font-size: 14px;
 	line-height: 60px;
 }
+
 .layui-body {
 	left: 0;
 }
+
 .layui-layout-admin .layui-footer {
 	left: 0;
 	text-align: center;
 }
+
 .tot-panel {
 	margin: 5px 10px;
 	background-color: #fff;
 }
-.layui-col-md4{
+
+.layui-col-md4 {
 	margin-top: 5px;
 }
+
 .layui-breadcrumb span {
-    padding-left: 8px;
-    font-family: Sim sun;
+	padding-left: 8px;
+	font-family: Sim sun;
 }
+
 .tot-panel h2 {
 	border-bottom: 1px dotted #E9E9E9;
 	padding: 0 15px;
@@ -72,45 +85,55 @@ body {
 .tot-panel-main {
 	padding: 10px 15px;
 }
-.tot-panel-main li{
+
+.tot-panel-main li {
 	padding: 5px 20px;
 	font-size: 14px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    color: #1AA195;
-   /*list-style: decimal-leading-zero inside; */
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	color: #1AA195;
+	/*list-style: decimal-leading-zero inside; */
 }
-li a{
+
+li a {
 	text-overflow: ellipsis;
 }
-.content-panel{
-	margin:10px 0;
+
+.content-panel {
+	margin: 10px 0;
 	padding: 10px;
 	background-color: #fff;
 	border-bottom: 1px solid #eee;
 }
-.center_text{
+
+.center_text {
 	text-align: center;
 }
-.tag{
+
+.tag {
 	padding: 20px;
 }
-h1{
+
+h1 {
 	padding: 10px;
 	margin-bottom: 10px;
 }
-p{
+
+p {
 	margin: 12px;
 	font-size: 15px;
 	line-height: 25px;
 }
-.desc p{
+
+.desc p {
 	margin: 2px;
 	font-size: 12px;
 	line-height: 18px;
 }
-.light{
+
+.light {
 	background-color: #fff;
 }
+
 </style>

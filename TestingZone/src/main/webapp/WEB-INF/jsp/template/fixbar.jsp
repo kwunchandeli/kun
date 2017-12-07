@@ -15,9 +15,10 @@
 			click : function(type) {
 				console.log(type);
 				if (type === 'bar1') {
-					alert('点击了bar1')
+					window.open("article/edit","编辑文章-TestingZone");
 				}
 			}
 		});
 	});
+	
 </script>
