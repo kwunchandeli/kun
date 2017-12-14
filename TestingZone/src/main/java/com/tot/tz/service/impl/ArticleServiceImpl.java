@@ -28,8 +28,8 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 	
 	@Override
-	public List<Article> geMytLimitArticles(int u_id, int start, int end) {
-		return articleDao.getMyLimitArticles(u_id, start, end);
+	public List<Article> geMytLimitArticles(int u_id, int start, int end,String status) {
+		return articleDao.getMyLimitArticles(u_id, start, end,status);
 	}
 	
 	@Override
@@ -80,16 +80,16 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	@Override
-	public Map<String, Object> getMyPagingArticles(int u_id,int perPage,int page){
+	public Map<String, Object> getMyPagingArticles(int u_id,int perPage,int page,String status){
 		Map<String, Object> map = new HashMap<String, Object>();
-		int count = articleDao.getCountByUid(u_id);
+		int count = articleDao.getCountByUid(u_id,status);
 		if(page>(count/perPage + 1)){
 			page = count/perPage + 1;
 		}
 		if(page<1){
 			page = 1;
 		}
-		List<Article> aList = articleDao.getMyLimitArticles(u_id, perPage*(page-1), perPage);
+		List<Article> aList = articleDao.getMyLimitArticles(u_id, perPage*(page-1), perPage,status);
 		map.put("count", count);
 		map.put("page", page);
 		map.put("perPage", perPage);

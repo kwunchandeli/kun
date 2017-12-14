@@ -48,6 +48,12 @@
 		AND a.u_id =
 		u.u_id
 		AND u.u_id=#{u_id}
+		<if test=" status == 1">
+			AND a.status = '1'
+		</if>
+		<if test=" status == 0">
+			AND a.status is null
+		</if>
 		ORDER BY a.create_time desc
 		LIMIT #{start},
 		#{end}
@@ -89,6 +95,12 @@
 		WHERE
 		a.u_id = u.u_id
 		AND u.u_id=#{u_id}
+		<if test=" status == 1">
+			AND a.status = '1'
+		</if>
+		<if test=" status == 0">
+			AND a.status is null
+		</if>
 	</select>
 	<select id="getArticleById" resultType="com.tot.tz.entity.Article">
 		SELECT

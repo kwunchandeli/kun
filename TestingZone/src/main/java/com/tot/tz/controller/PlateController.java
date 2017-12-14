@@ -96,8 +96,25 @@ public class PlateController {
 	
 	@GetMapping("/my/all/{page}")
 	public String my(@ModelAttribute("user") User user,@PathVariable int page,Model model){
-		Map<String, Object> myArticleMap = articleService.getMyPagingArticles(user.getU_id(), 10, page);
+		Map<String, Object> myArticleMap = articleService.getMyPagingArticles(user.getU_id(), 10, page,"2");
 		model.addAttribute("myArticleMap", myArticleMap);
+		model.addAttribute("type", "2");
+		return "my";
+	}
+	
+	@GetMapping("/my/public/{page}")
+	public String mypublic(@ModelAttribute("user") User user,@PathVariable int page,Model model){
+		Map<String, Object> myArticleMap = articleService.getMyPagingArticles(user.getU_id(), 10, page,"1");
+		model.addAttribute("myArticleMap", myArticleMap);
+		model.addAttribute("type", "1");
+		return "my";
+	}
+	
+	@GetMapping("/my/nonpublic/{page}")
+	public String nonpublic(@ModelAttribute("user") User user,@PathVariable int page,Model model){
+		Map<String, Object> myArticleMap = articleService.getMyPagingArticles(user.getU_id(), 10, page,"0");
+		model.addAttribute("myArticleMap", myArticleMap);
+		model.addAttribute("type", "0");
 		return "my";
 	}
 }

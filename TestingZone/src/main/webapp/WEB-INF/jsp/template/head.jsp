@@ -15,6 +15,8 @@
 					<c:if test="${user.u_id != 0}">
 						<dl class="layui-nav-child">
 				          <dd><a href="my/all/1" target="_blank">我的文章</a></dd>
+				          <dd><a href="my/public/1" target="_blank">公开文章</a></dd>
+				          <dd><a href="my/nonpublic/1" target="_blank">非公开文章</a></dd>
 				          <c:if test="${user.role == \"1\"}">
 				          		<dd><a onclick="javascript:layer.msg('功能开发中，敬请期待！');">系统管理</a></dd>
 				          </c:if>

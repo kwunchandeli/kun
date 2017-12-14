@@ -6,7 +6,19 @@
 <blockquote class="layui-elem-quote"
 	style="margin-top: 5px;margin-bottom: 0px;">
 	<span class="layui-breadcrumb" style="visibility: visible;"> <a
-		href="main/1"><cite>首页</cite></a> <span class="layui-box">&gt;</span><cite>我的文章</cite>
+		href="main/1"><cite>首页</cite></a> <span class="layui-box">&gt;</span>
+		<c:choose>
+			<c:when test="${type == \"2\"}">
+				<cite>我的文章</cite>
+			</c:when>
+			<c:when test="${type == \"1\"}">
+				<cite>公开文章</cite>
+			</c:when>
+			<c:when test="${type == \"0\"}">
+				<cite>非公开文章</cite>
+			</c:when>
+		</c:choose>
+		
 	</span>
 </blockquote>
 
@@ -26,7 +38,7 @@
 				
 				<div class="layui-btn-group" style="position: absolute;right: 5px;bottom: 5px">
 				
-					<c:if test="${article.status == 1}">
+					<c:if test="${article.status != \"1\"}">
 						<button class="layui-btn layui-btn-primary layui-btn-sm" onclick="javascript:layer.msg('功能开发中，敬请期待！');" title="设置为所有人可见">
 					    	<i class="layui-icon">&#xe641;</i>
 					    </button>
