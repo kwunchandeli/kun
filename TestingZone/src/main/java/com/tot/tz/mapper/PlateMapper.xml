@@ -5,4 +5,7 @@
 	<select id="getPlateList" resultType="com.tot.tz.entity.Plate">
 		select * from plate 
 	</select>
+	<select id="getPcount" resultType="int">
+		select count(*) from plate 
+	</select>
 </mapper>

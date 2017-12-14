@@ -27,11 +27,12 @@ import com.tot.tz.entity.Plate;
 import com.tot.tz.entity.User;
 import com.tot.tz.service.ArticleService;
 import com.tot.tz.service.PlateService;
+import com.tot.tz.service.StatisticsService;
 import com.tot.tz.service.UserService;
 import com.tot.tz.util.IpUtil;
 
 @Controller
-@SessionAttributes({"username","user","pList","hotArticleList"})
+@SessionAttributes({"username","user","pList","hotArticleList","statistics"})
 public class PlateController {
 	
 	private static Logger logger = LogManager.getLogger(PlateController.class.getName());
@@ -45,20 +46,24 @@ public class PlateController {
 	@Resource
 	private ArticleService articleService;
 	
+	@Resource
+	private StatisticsService statisticsService;
+	
 	@GetMapping("/main/{page}")
 	public String mainPage( @PathVariable int page,HttpServletRequest request,Model model){
 		String ip = IpUtil.getIpAddr(request);
 		logger.info("访问地址:"+ip);  
-		String username = userService.getUsernameByIp(ip);
+		//String username = userService.getUsernameByIp(ip);
 		User user = userService.getUserByIp(ip);
 		List<Plate> pList = plateService.getPlateList();
 		List<Article> hotArticleList = articleService.getHotArticles();
 		Map<String, Object> contentMap = articleService.getPagingArticles(0, 10, page);
-		model.addAttribute("username", username);
+		//model.addAttribute("username", username);
 		model.addAttribute("user", user);
 		model.addAttribute("pList", pList);
 		model.addAttribute("hotArticleList", hotArticleList);
 		model.addAttribute("contentMap", contentMap);
+		model.addAttribute("statistics", statisticsService.getStatistics());
 		return "main";
 	}
 	

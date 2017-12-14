@@ -6,5 +6,5 @@ import com.tot.tz.entity.Plate;
 
 public interface PlateDao {
 	public List<Plate> getPlateList();
-
+	public int getPcount();
 }

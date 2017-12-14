@@ -29,18 +29,16 @@
 <div class="layui-col-md12 tot-panel">
 	<h2>网站统计</h2>
 	<ul class="tot-panel-main">
-		<li>建站日期 : 2017-09-28</li>
-		<li>文章总数 : 10 条</li>
-		<li>运行天数 : 64 天</li>
-		<li>标签总数 : 9 个</li>
-		<li>最后更新 : 2017-10-22</li>
-		<li></li>
+		<li>版块数量 : ${statistics.pCount}</li>
+		<li>文章总数 : ${statistics.aCount} 条</li>
+		<li>文章浏览次数 :${statistics.pvCount}次</li>
 	</ul>
 </div>
 
 <div class="layui-col-md12 tot-panel">
 	<h2>友情链接</h2>
 	<ul class="tot-panel-main">
+		<li><a href="https://macacajs.github.io/zh/" target="_blank">macaca</a></li>
 		<li><a href="http://www.layui.com" target="_blank">Layui</a></li>
 		<li><a href="http://www.thinkphp.cn" target="_blank">Thinkphp</a></li>
 	</ul>

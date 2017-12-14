@@ -140,4 +140,10 @@
 		SET pv=pv+1
 		WHERE	a_id = #{a_id}
     </update>
+    <select id="getAcount" resultType="int">
+    	select count(*) from article
+	</select>
+	<select id="getPvcount" resultType="int">
+    	select sum(pv) FROM article
+	</select>
 </mapper>
