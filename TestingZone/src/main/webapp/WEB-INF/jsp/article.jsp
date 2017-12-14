@@ -15,7 +15,8 @@
 
 <title>${article.title}-TestingZone</title>
 <%@ include file="template/css.jsp"%>
-<link rel="stylesheet" type="text/css" href="css/editor.css" />
+<!-- <link rel="stylesheet" type="text/css" href="css/editor.css" /> -->
+<link rel="stylesheet" type="text/css" href="js/kindeditor/plugins/code/prettify.css" />
 <style>
 @media screen and (min-width: 900px) {
 	.layui-container{

@@ -121,7 +121,8 @@
 						        'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image', 
 						        'table', 'hr', 'emoticons', 'pagebreak', 'link', 'unlink', '|', 'about'
 						],
-				cssPath: '/TestingZone/css/editor.css'
+				//cssPath: '/TestingZone/css/editor.css'
+				cssPath: '/TestingZone/js/kindeditor/plugins/code/prettify.css'
 			};
 			window.editor = K.create('#editor_id', options);
 		});
