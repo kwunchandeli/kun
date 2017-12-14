@@ -111,7 +111,17 @@
 		KindEditor.ready(function(K) {
 			var options = {
 				height : '600px',
-				filterMode : true
+				filterMode : true,
+				items: [
+						        'source', '|', 'undo', 'redo', '|', 'preview', 'print', 'template', 'code', 'cut', 'copy', 'paste',
+						        'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
+						        'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+						        'superscript', 'clearhtml', 'quickformat', 'selectall', '|', 'fullscreen', '/',
+						        'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+						        'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image', 
+						        'table', 'hr', 'emoticons', 'pagebreak', 'link', 'unlink', '|', 'about'
+						],
+				cssPath: '/TestingZone/css/editor.css'
 			};
 			window.editor = K.create('#editor_id', options);
 		});

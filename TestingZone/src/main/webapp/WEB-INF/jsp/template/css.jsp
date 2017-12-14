@@ -39,18 +39,22 @@ body {
 .desc {
 	padding: 10px;
 	-webkit-line-clamp: 2;
-	line-height: 25px;
+	line-height: 18px;
 	font-size: 14px;
 	text-overflow: ellipsis;
-	height: 85px;
+	height: 82px;
 	overflow: hidden;
 }
 .desc *{
-	font-size: 14px;
+	font-size: 12px;
+	line-height: 18px;
+	padding: 0;
+	margin:0;
 }
 .data {
 	text-align: right;
 	padding-right: 30px;
+	margin-top:5px;
 }
 
 .foot {
@@ -131,15 +135,9 @@ p {
 	line-height: 25px;
 }
 
-.desc p {
-	margin: 2px;
-	font-size: 12px;
-	line-height: 18px;
-}
-
 .light {
 	background-color: #fff;
-	padding: 0 15px;
+	padding: 0 15px 20px 15px;
 }
 .edit_title{
 	display: inline-block;

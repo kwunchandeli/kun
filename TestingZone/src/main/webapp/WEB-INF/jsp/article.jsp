@@ -15,6 +15,7 @@
 
 <title>${article.title}-TestingZone</title>
 <%@ include file="template/css.jsp"%>
+<link rel="stylesheet" type="text/css" href="css/editor.css" />
 <style>
 @media screen and (min-width: 900px) {
 	.layui-container{
