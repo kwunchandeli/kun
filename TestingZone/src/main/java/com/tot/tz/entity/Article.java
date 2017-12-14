@@ -5,12 +5,15 @@ import java.util.Date;
 public class Article {
 	private int a_id;
 	private int p_id;
+	private int u_id;
 	private String title;
 	private String content;
 	private Date create_time;
 	private String p_name;
 	private int pv;
 	private String u_name;
+	private String status;
+	private String sex;
 
 	public Article() {
 		super();
@@ -78,6 +81,30 @@ public class Article {
 
 	public void setP_id(int p_id) {
 		this.p_id = p_id;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getSex() {
+		return sex;
+	}
+
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+
+	public int getU_id() {
+		return u_id;
+	}
+
+	public void setU_id(int u_id) {
+		this.u_id = u_id;
 	}
 
 }

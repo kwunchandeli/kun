@@ -8,6 +8,8 @@ public class User {
 	private String u_ip;
 
 	private String role;
+	
+	private String sex;
 
 	public User() {
 		super();
@@ -43,6 +45,14 @@ public class User {
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	public String getSex() {
+		return sex;
+	}
+
+	public void setSex(String sex) {
+		this.sex = sex;
 	}
 
 }

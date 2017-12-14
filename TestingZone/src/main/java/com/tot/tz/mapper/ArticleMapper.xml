@@ -4,68 +4,128 @@
 <mapper namespace="com.tot.tz.dao.ArticleDao">
 	<select id="getLimitArticles" resultType="com.tot.tz.entity.Article">
 		SELECT
-			a.a_id AS a_id,
-			a.title AS title,
-			a.content AS content,
-			a.create_time AS create_time,
-			p.p_name AS p_name,
-			a.pv AS pv,
-			u.u_name AS u_name
+		a.a_id AS a_id,
+		a.title AS title,
+		a.content AS content,
+		a.create_time AS create_time,
+		p.p_name AS p_name,
+		a.pv AS pv,
+		u.u_name AS u_name,
+		u.sex AS sex		
 		FROM
-			article a,
-			plate p,
-			t_user u
+		article a,
+		plate p,
+		t_user u
 		WHERE
 		a.p_id = p.p_id
-		AND a.u_id = u.u_id
-			<if test=" p_id != 0">
-				AND a.p_id = #{p_id}
-			</if>
+		AND a.u_id =
+		u.u_id
+		AND a.status = 1
+		<if test=" p_id != 0">
+			AND a.p_id = #{p_id}
+		</if>
+		ORDER BY a.create_time desc
+		LIMIT #{start},
+		#{end}
+	</select>
+	<select id="getMyLimitArticles" resultType="com.tot.tz.entity.Article">
+		SELECT
+		a.a_id AS a_id,
+		a.title AS title,
+		a.content AS content,
+		a.status AS status,
+		a.create_time AS create_time,
+		p.p_name AS p_name,
+		a.pv AS pv,
+		u.u_name AS u_name,
+		u.sex AS sex		
+		FROM
+		article a,
+		plate p,
+		t_user u
+		WHERE
+		a.p_id = p.p_id
+		AND a.u_id =
+		u.u_id
+		AND u.u_id=#{u_id}
 		ORDER BY a.create_time desc
 		LIMIT #{start},
 		#{end}
 	</select>
 	<select id="getHotArticles" resultType="com.tot.tz.entity.Article">
 		SELECT
-			a_id,
-			title,
-			pv,
-			p_id
+		a_id,
+		title,
+		pv,
+		p_id
 		FROM
-			article
+		article
+		where status = 1
 		ORDER BY pv DESC
 		LIMIT 0,5
 	</select>
 	<select id="getCountByPlateid" resultType="int">
 		SELECT
-			count(*)
+		count(*)
 		FROM
-			article a,
-			plate p,
-			t_user u
+		article a,
+		plate p,
+		t_user u
 		WHERE
 		a.p_id = p.p_id
-		AND a.u_id = u.u_id
-			<if test="p_id != 0">
-				AND a.p_id = #{p_id}
-			</if>
+		AND
+		a.u_id = u.u_id
+		AND a.status = 1
+		<if test="p_id != 0">
+			AND a.p_id = #{p_id}
+		</if>
+	</select>
+	<select id="getCountByUid" resultType="int">
+		SELECT
+		count(*)
+		FROM
+		article a,
+		t_user u
+		WHERE
+		a.u_id = u.u_id
+		AND u.u_id=#{u_id}
 	</select>
 	<select id="getArticleById" resultType="com.tot.tz.entity.Article">
 		SELECT
-			a.a_id AS a_id,
-			a.title AS title,
-			a.content AS content,
-			a.create_time AS create_time,
-			p.p_name AS p_name,
-			a.pv AS pv,
-			u.u_name AS u_name
+		a.a_id AS a_id,
+		a.title AS title,
+		a.p_id AS p_id,
+		a.content AS content,
+		a.create_time AS
+		create_time,
+		p.p_name AS p_name,
+		a.pv AS pv,
+		u.u_name AS u_name,
+		a.status AS status,
+		u.u_id AS u_id
 		FROM
-			article a,
-			plate p,
-			t_user u
+		article a,
+		plate p,
+		t_user u
 		WHERE
-			a.p_id = p.p_id
-			AND a.u_id = u.u_id
-			AND a.a_id = #{a_id}
+		a.p_id = p.p_id
+		AND a.u_id
+		= u.u_id
+		AND a.a_id = #{a_id}
 	</select>
+	<insert id="saveArticle" parameterType="com.tot.tz.dto.ArticleDto"
+		useGeneratedKeys="true" keyProperty="a_id">
+		INSERT INTO article (p_id,title,	content,	u_id,	create_time,status)
+		VALUES	(#{p_id},#{title},#{content},#{u_id},now(),#{status})
+	</insert>
+	<update id="editArticle" parameterType="com.tot.tz.dto.ArticleDto" >
+		UPDATE article
+		SET p_id = #{p_id},title=#{title},content=#{content},status=#{status}
+		WHERE	a_id = #{a_id}
+    </update>
+    <update id="updatePageView">
+    	UPDATE article
+		SET pv=pv+1
+		WHERE	a_id = #{a_id}
+    </update>
 </mapper>

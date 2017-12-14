@@ -1,5 +1,6 @@
 package com.tot.tz.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,10 +15,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.alibaba.fastjson.JSON;
+import com.tot.tz.dto.ArticleDto;
 import com.tot.tz.entity.Article;
 import com.tot.tz.entity.Plate;
 import com.tot.tz.entity.User;
@@ -27,7 +31,7 @@ import com.tot.tz.service.UserService;
 import com.tot.tz.util.IpUtil;
 
 @Controller
-@SessionAttributes({"username","pList","hotArticleList"})
+@SessionAttributes({"username","user","pList","hotArticleList"})
 public class PlateController {
 	
 	private static Logger logger = LogManager.getLogger(PlateController.class.getName());
@@ -46,10 +50,12 @@ public class PlateController {
 		String ip = IpUtil.getIpAddr(request);
 		logger.info("访问地址:"+ip);  
 		String username = userService.getUsernameByIp(ip);
+		User user = userService.getUserByIp(ip);
 		List<Plate> pList = plateService.getPlateList();
 		List<Article> hotArticleList = articleService.getHotArticles();
 		Map<String, Object> contentMap = articleService.getPagingArticles(0, 10, page);
 		model.addAttribute("username", username);
+		model.addAttribute("user", user);
 		model.addAttribute("pList", pList);
 		model.addAttribute("hotArticleList", hotArticleList);
 		model.addAttribute("contentMap", contentMap);
@@ -64,16 +70,34 @@ public class PlateController {
 	}
 	
 	@GetMapping("/article/{article_id}")
-	public String articleContent(@PathVariable int article_id, Model model){
-		Article article = articleService.getArticleById(article_id);
-		 model.addAttribute("article",article);
+	public String articleContent(@ModelAttribute("user") User user,@PathVariable int article_id, Model model){
+		Article article = articleService.updatePageView(article_id,user.getU_id());
+		model.addAttribute("article",article);
 		return "article";
 	}
 	
-	@GetMapping("/article/edit")
-	public String edit( Model model){
-		//Article article = articleService.getArticleById(article_id);
-		// model.addAttribute("article",article);
+	@GetMapping("/article/edit/{article_id}")
+	public String edit(@PathVariable int article_id,Model model){
+		Article article = articleService.getArticleById(article_id);
+		model.addAttribute("article",article);
 		return "edit";
+	}
+	
+	@PostMapping("/save/article")
+	@ResponseBody
+	public Map<String, Object> save(@ModelAttribute("user") User user,@RequestBody ArticleDto articleDto){
+		articleDto.setU_id(user.getU_id());
+		int id = articleService.saveOrUpdateArticle(articleDto);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("id", id);
+		map.put("status", 0);
+		return map;
+	}
+	
+	@GetMapping("/my/all/{page}")
+	public String my(@ModelAttribute("user") User user,@PathVariable int page,Model model){
+		Map<String, Object> myArticleMap = articleService.getMyPagingArticles(user.getU_id(), 10, page);
+		model.addAttribute("myArticleMap", myArticleMap);
+		return "my";
 	}
 }

@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix='fmt' uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
 	String path = request.getContextPath();
@@ -24,7 +25,7 @@
 </head>
 
 <body>
-	<div class="fix_header">
+<%-- 	<div class="fix_header">
 		<div class="layui-container">
 			<div class="layui-row">
 				<div class="layui-col-md2 nav_logo">测试知识积累</div>
@@ -33,8 +34,9 @@
 				</ul>
 			</div>
 		</div>
-	</div>
-
+	</div> --%>
+	<%@ include file="template/head.jsp"%>
+	
 	<div class="layui-container content">
 		<div class="layui-row">
 			<div class="layui-col-md12">
@@ -52,6 +54,11 @@
 						value="${article.create_time}" pattern="yyyy-MM-dd HH:mm:ss" /></span> <span>分类 :
 							${article.p_name}</span> <span>作者 : ${article.u_name}</span> <span>阅读
 							: ${article.pv}</span>
+							<c:if test="${user.u_id != 0}">
+								<button class="layui-btn layui-btn-sm" title="编辑" onclick="window.location.href = '/TestingZone/article/edit/${article.a_id}' ;">
+								    <i class="layui-icon">&#xe642;</i>
+								  </button>
+							</c:if>
 					</div>
 					${article.content}
 				</div>

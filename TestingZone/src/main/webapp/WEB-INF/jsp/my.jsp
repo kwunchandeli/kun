@@ -11,7 +11,7 @@
 <head>
 <base href="<%=basePath%>">
 
-<title>TestingZone</title>
+<title>我的文章-TestingZone</title>
 <%@ include file="template/css.jsp"%>
 </head>
 
@@ -30,12 +30,12 @@
 	
 	<div class="layui-container content">
 		<div class="layui-row">
-			<div class="layui-col-md8">
-				<%@ include file="template/content.jsp"%>
+			<div class="layui-col-md12">
+				<%@ include file="template/overview.jsp"%>
 			</div>
-			<div class="layui-col-md4">
+<%-- 			<div class="layui-col-md4">
 				<%@ include file="template/right.jsp"%>
-			</div>
+			</div> --%>
 		</div>
 		<div class="layui-row">
 			<%@ include file="template/foot.jsp"%>
@@ -44,32 +44,26 @@
 	<%@ include file="template/fixbar.jsp"%>
 	<script type="text/javascript">
 			layui.use(['laypage','element'], function() {
-		var laypage = layui.laypage;
-		var element = layui.element;
-		//执行一个laypage实例
-		laypage.render({
-			elem : 'paging' ,
-			layout : [ 'count', 'prev', 'page', 'next' ],
-			count : ${contentMap.count} ,
-			curr : ${contentMap.page},
-			jump : function(obj, first) {
-				if (!first) {
-					var url = window.location.pathname;
-					console.log(url);
-					if (url.indexOf("main") > -1) {
-						window.location.href = "/TestingZone/main/" + obj.curr;
-					} else if (url.indexOf("plate") > -1) {
+			var laypage = layui.laypage;
+			var element = layui.element;
+			//执行一个laypage实例
+			laypage.render({
+				elem : 'paging' ,
+				layout : [ 'count', 'prev', 'page', 'next' ],
+				count : ${myArticleMap.count} ,
+				curr : ${myArticleMap.page},
+				jump : function(obj, first) {
+					if (!first) {
+						var url = window.location.pathname;
+						console.log(url);
 						var position = url.lastIndexOf("/")
 						var u = url.substring(0, position + 1);
 						console.log(u);
 						window.location.href = u + obj.curr;
-					} else {
-
 					}
 				}
-			}
+			});
 		});
-	});
 	</script>
 </body>
 </html>

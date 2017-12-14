@@ -20,11 +20,18 @@
 			<h2 id="a_id" style="display: none;">${article.a_id}</h2>
 			<div class="desc">${article.content}</div>
 			<div class="data">
-				<span><i class="layui-icon"></i> <fmt:formatDate
-						value="${article.create_time}" pattern="yyyy-MM-dd HH:mm:ss" /></span> 
-						<span>By</span>
-						<span><i
-					class="layui-icon"></i> ${article.u_name}</span>
+				<span><i class="layui-icon"></i>
+				<fmt:formatDate value="${article.create_time}"
+						pattern="yyyy-MM-dd HH:mm:ss" /></span> <span>By</span> <span> <c:choose>
+						<c:when
+							test="${article.sex == 1}">  
+							<i	class="layui-icon">&#xe662</i>
+						</c:when>
+						<c:otherwise> 
+							<i	class="layui-icon">&#xe661</i> 
+						</c:otherwise>
+					</c:choose> ${article.u_name}
+				</span>
 			</div>
 		</li>
 	</c:forEach>

@@ -6,7 +6,7 @@
 
 <script type="text/javascript">
 
-	layui.use('util', function() {
+	layui.use(['util','form'], function() {
 		var util = layui.util;
 
 		//执行
@@ -15,7 +15,7 @@
 			click : function(type) {
 				console.log(type);
 				if (type === 'bar1') {
-					window.open("article/edit","编辑文章-TestingZone");
+					window.open("article/edit/0","编辑文章-TestingZone");
 				}
 			}
 		});

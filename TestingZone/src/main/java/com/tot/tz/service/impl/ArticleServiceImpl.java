@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.tot.tz.dao.ArticleDao;
 import com.tot.tz.dao.PlateDao;
+import com.tot.tz.dto.ArticleDto;
 import com.tot.tz.entity.Article;
 import com.tot.tz.entity.Plate;
 import com.tot.tz.service.ArticleService;
@@ -25,7 +26,12 @@ public class ArticleServiceImpl implements ArticleService {
 	public List<Article> getLimitArticles(int p_id, int start, int end) {
 		return articleDao.getLimitArticles(p_id, start, end);
 	}
-
+	
+	@Override
+	public List<Article> geMytLimitArticles(int u_id, int start, int end) {
+		return articleDao.getMyLimitArticles(u_id, start, end);
+	}
+	
 	@Override
 	public List<Article> getHotArticles() {
 		return articleDao.getHotArticles();
@@ -50,7 +56,46 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	@Override
-	public Article getArticleById(int p_id) {
-		return articleDao.getArticleById(p_id);
+	public Article getArticleById(int a_id) {
+		return articleDao.getArticleById(a_id);
 	}
+
+	@Override
+	public int saveOrUpdateArticle(ArticleDto articleDto) {
+		if(articleDto.getA_id() == 0){
+			articleDao.saveArticle(articleDto);
+		}else {
+			articleDao.editArticle(articleDto);
+		}
+		return articleDto.getA_id();
+	}
+
+	@Override
+	public Article updatePageView(int a_id,int u_id) {
+		Article article = articleDao.getArticleById(a_id);
+		if(a_id != 0 && article.getU_id() != u_id){
+			articleDao.updatePageView(a_id);
+		}
+		return article;
+	}
+
+	@Override
+	public Map<String, Object> getMyPagingArticles(int u_id,int perPage,int page){
+		Map<String, Object> map = new HashMap<String, Object>();
+		int count = articleDao.getCountByUid(u_id);
+		if(page>(count/perPage + 1)){
+			page = count/perPage + 1;
+		}
+		if(page<1){
+			page = 1;
+		}
+		List<Article> aList = articleDao.getMyLimitArticles(u_id, perPage*(page-1), perPage);
+		map.put("count", count);
+		map.put("page", page);
+		map.put("perPage", perPage);
+		map.put("aList", aList);
+		return map;
+	}
+
+	
 }

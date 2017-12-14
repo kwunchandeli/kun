@@ -3,6 +3,9 @@
 
 <link rel="stylesheet" href="js/layui/css/layui.css">
 <style>
+*{
+	box-sizing: border-box;
+}
 body {
 	color: #666;
 	background-color: #f5f5f5;
@@ -42,7 +45,9 @@ body {
 	height: 85px;
 	overflow: hidden;
 }
-
+.desc *{
+	font-size: 14px;
+}
 .data {
 	text-align: right;
 	padding-right: 30px;
@@ -135,5 +140,47 @@ p {
 .light {
 	background-color: #fff;
 }
-
+.edit_title{
+	display: inline-block;
+	width: 100%;
+	font-size: 18px;
+	line-height: 27px;
+	padding: 2px 10px;
+	border: none;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+.edit-panel{
+	padding: 10px 20px;
+}
+.edit-row{
+	font-size: 14px;
+	height: 35px;
+	line-height: 35px;
+	text-align: left;
+	position: relative;
+}
+.font-red{
+	position: absolute;
+	line-height: 35px;
+	left: -10px;
+	color: #e35b5a;
+}
+.edit-row .row-left{
+	display: inline-block;
+}
+.row-left{
+	min-width: 130px;
+	vertical-align: middle;
+}
+.edit-row .row-right{
+	display: inline-block;
+	height: 35px;
+	line-height: 35px;
+	vertical-align: middle;
+}
+.layui-form-switch{
+	box-sizing: content-box;
+	margin: auto;
+}
 </style>
