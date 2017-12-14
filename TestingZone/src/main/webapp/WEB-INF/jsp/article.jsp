@@ -16,9 +16,9 @@
 <title>${article.title}-TestingZone</title>
 <%@ include file="template/css.jsp"%>
 <style>
-@media screen and (min-width: 800px) {
+@media screen and (min-width: 900px) {
 	.layui-container{
-		width: 750px;
+		width: 850px;
 	}
 }
 </style>
@@ -54,7 +54,7 @@
 						value="${article.create_time}" pattern="yyyy-MM-dd HH:mm:ss" /></span> <span>分类 :
 							${article.p_name}</span> <span>作者 : ${article.u_name}</span> <span>阅读
 							: ${article.pv}</span>
-							<c:if test="${user.u_id != 0}">
+							<c:if test="${user.u_id == article.u_id}">
 								<button class="layui-btn layui-btn-sm" title="编辑" onclick="window.location.href = '/TestingZone/article/edit/${article.a_id}' ;">
 								    <i class="layui-icon">&#xe642;</i>
 								  </button>
@@ -69,5 +69,11 @@
 		</div>
 	</div>
 	<%@ include file="template/fixbar.jsp"%>
+	<script type="text/javascript">
+	layui.use(['laypage','element'], function() {
+		var laypage = layui.laypage;
+		var element = layui.element;
+	});
+	</script>
 </body>
 </html>

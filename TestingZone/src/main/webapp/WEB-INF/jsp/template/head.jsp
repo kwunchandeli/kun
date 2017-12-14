@@ -5,7 +5,9 @@
 <div class="fix_header">
 	<div class="layui-container">
 		<div class="layui-row">
-			<div class="layui-col-md2 nav_logo">测试知识积累</div>
+			<div class="layui-col-md2 nav_logo">
+			<img src="images/TestingZone-2.gif">
+			</div>
 			<ul class="layui-nav layui-layout-right">
 				<li class="layui-nav-item">
 					<a href="javascript:;">

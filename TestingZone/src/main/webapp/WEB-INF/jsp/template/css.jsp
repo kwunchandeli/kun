@@ -139,6 +139,7 @@ p {
 
 .light {
 	background-color: #fff;
+	padding: 0 15px;
 }
 .edit_title{
 	display: inline-block;

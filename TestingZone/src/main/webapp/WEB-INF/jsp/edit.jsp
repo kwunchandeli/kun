@@ -116,8 +116,9 @@
 			window.editor = K.create('#editor_id', options);
 		});
 
-		layui.use('form', function() {
+		layui.use(['form','element'], function() {
 			var form = layui.form;
+			var element = layui.element;
 			form.on('submit(go)', function(data) {
 				editor.sync();
 				data.field.content =$("#editor_id").val();
@@ -131,7 +132,7 @@
 						type : "POST",
 						url : "save/article",
 						dataType : "json",
-						contentType : "application/json",
+						contentType: "application/json",
 						//data: data.field,
 						data : JSON.stringify(data.field),
 						success : function(result) {
