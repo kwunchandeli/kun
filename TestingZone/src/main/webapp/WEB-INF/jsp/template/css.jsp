@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
-
+	
+<link rel="shortcut icon" href="images/TestingZone-2.gif" type="image/x-icon" />
 <link rel="stylesheet" href="js/layui/css/layui.css">
 <style>
 *{
