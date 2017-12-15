@@ -61,9 +61,6 @@ public class FileUploadController {
 			type = fileName.indexOf(".") != -1 ? fileName.substring(
 					fileName.lastIndexOf(".") + 1, fileName.length()) : null;
 					
-			System.out.println("上传的文件类型:" + type);
-			System.out.println(dir);
-			
 			if(type!=null&&imageTypeString.indexOf(type.toLowerCase())>-1){
 				//新文件名，添加原始文件名后缀
 				newFileName = UUID.randomUUID().toString().replaceAll("-", "") + "." + type;

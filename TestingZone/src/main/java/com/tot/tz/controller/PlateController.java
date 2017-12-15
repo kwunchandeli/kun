@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -32,7 +33,7 @@ import com.tot.tz.service.UserService;
 import com.tot.tz.util.IpUtil;
 
 @Controller
-@SessionAttributes({"username","user","pList","hotArticleList","statistics"})
+@SessionAttributes({"user","pList","hotArticleList","statistics"})
 public class PlateController {
 	
 	private static Logger logger = LogManager.getLogger(PlateController.class.getName());
@@ -51,19 +52,8 @@ public class PlateController {
 	
 	@GetMapping("/main/{page}")
 	public String mainPage( @PathVariable int page,HttpServletRequest request,Model model){
-		String ip = IpUtil.getIpAddr(request);
-		logger.info("访问地址:"+ip);  
-		//String username = userService.getUsernameByIp(ip);
-		User user = userService.getUserByIp(ip);
-		List<Plate> pList = plateService.getPlateList();
-		List<Article> hotArticleList = articleService.getHotArticles();
 		Map<String, Object> contentMap = articleService.getPagingArticles(0, 10, page);
-		//model.addAttribute("username", username);
-		model.addAttribute("user", user);
-		model.addAttribute("pList", pList);
-		model.addAttribute("hotArticleList", hotArticleList);
 		model.addAttribute("contentMap", contentMap);
-		model.addAttribute("statistics", statisticsService.getStatistics());
 		return "main";
 	}
 	
@@ -75,8 +65,12 @@ public class PlateController {
 	}
 	
 	@GetMapping("/article/{article_id}")
-	public String articleContent(@ModelAttribute("user") User user,@PathVariable int article_id, Model model){
-		Article article = articleService.updatePageView(article_id,user.getU_id());
+	public String articleContent(@PathVariable int article_id, Model model,HttpSession session){
+		int uid = 0;
+		if(session.getAttribute("user") != null){
+			 uid = ((User)session.getAttribute("user")).getU_id();
+		}
+		Article article = articleService.updatePageView(article_id,uid);
 		model.addAttribute("article",article);
 		return "article";
 	}

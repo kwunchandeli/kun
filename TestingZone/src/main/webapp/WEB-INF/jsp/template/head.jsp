@@ -14,7 +14,7 @@
 				          ${user.u_name==null?"未登记用户":user.u_name}
 				          <!-- <span class="layui-nav-more"></span>，欢迎您！ -->
 				     </a>
-					<c:if test="${user.u_id != 0}">
+					<c:if test="${user.u_id > 0}">
 						<dl class="layui-nav-child">
 				          <dd><a href="my/all/1" target="_blank">我的文章</a></dd>
 				          <dd><a href="my/public/1" target="_blank">公开文章</a></dd>
