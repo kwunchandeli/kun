@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.alibaba.fastjson.JSON;
+import com.tot.tz.config.Config;
 import com.tot.tz.dto.ArticleDto;
 import com.tot.tz.entity.Article;
 import com.tot.tz.entity.Plate;
@@ -40,6 +41,9 @@ import com.tot.tz.util.IpUtil;
 @SessionAttributes("user")
 public class FileUploadController {
 
+	@Resource
+	private Config config;
+	
 	private static Logger logger = LogManager
 			.getLogger(FileUploadController.class.getName());
 
@@ -48,7 +52,7 @@ public class FileUploadController {
 	public Map<String, Object> save(@ModelAttribute("user") User user,@RequestParam("imgFile") MultipartFile file) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (file != null) {
-			String dir="F:/upload/images/" + user.getU_id() + "/";
+			String dir=config.UPLOADDIR + "images/" + user.getU_id() + "/";
 			String type = null;// 文件类型
 			String newFileName = "";
 			String fileName = file.getOriginalFilename();// 文件原名称
@@ -59,7 +63,6 @@ public class FileUploadController {
 					
 			System.out.println("上传的文件类型:" + type);
 			System.out.println(dir);
-			System.out.println(user.getU_id());
 			
 			if(type!=null&&imageTypeString.indexOf(type.toLowerCase())>-1){
 				//新文件名，添加原始文件名后缀
