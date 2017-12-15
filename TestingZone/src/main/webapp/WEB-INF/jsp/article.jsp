@@ -16,25 +16,28 @@
 <title>${article.title}-TestingZone</title>
 <%@ include file="template/css.jsp"%>
 <!-- <link rel="stylesheet" type="text/css" href="css/editor.css" /> -->
-<link rel="stylesheet" type="text/css" href="js/kindeditor/plugins/code/prettify.css" />
+<link rel="stylesheet" type="text/css"
+	href="js/kindeditor/plugins/code/prettify.css" />
 <style>
 @media screen and (min-width: 900px) {
-	.layui-container{
+	.layui-container {
 		width: 850px;
 	}
 }
+
 pre {
 	white-space: pre-wrap;
 	word-wrap: break-word;
 }
-pre.prettyprint{
+
+pre.prettyprint {
 	white-space: pre-wrap;
 }
 </style>
 </head>
 
 <body>
-<%-- 	<div class="fix_header">
+	<%-- 	<div class="fix_header">
 		<div class="layui-container">
 			<div class="layui-row">
 				<div class="layui-col-md2 nav_logo">测试知识积累</div>
@@ -45,7 +48,7 @@ pre.prettyprint{
 		</div>
 	</div> --%>
 	<%@ include file="template/head.jsp"%>
-	
+
 	<div class="layui-container content">
 		<div class="layui-row">
 			<div class="layui-col-md12">
@@ -59,15 +62,16 @@ pre.prettyprint{
 					<!-- 加载文章内容 -->
 					<h1 class="center_text">${article.title}</h1>
 					<div class="center_text tag">
-						<span>时间 : <fmt:formatDate
-						value="${article.create_time}" pattern="yyyy-MM-dd HH:mm:ss" /></span> <span>分类 :
+						<span>时间 : <fmt:formatDate value="${article.create_time}"
+								pattern="yyyy-MM-dd HH:mm:ss" /></span> <span>分类 :
 							${article.p_name}</span> <span>作者 : ${article.u_name}</span> <span>阅读
 							: ${article.pv}</span>
-							<c:if test="${user.u_id == article.u_id}">
-								<button class="layui-btn layui-btn-sm" title="编辑" onclick="window.location.href = '/TestingZone/article/edit/${article.a_id}' ;">
-								    <i class="layui-icon">&#xe642;</i>
-								  </button>
-							</c:if>
+						<c:if test="${user.u_id == article.u_id}">
+							<button class="layui-btn layui-btn-sm" title="编辑"
+								onclick="window.location.href = '/TestingZone/article/edit/${article.a_id}' ;">
+								<i class="layui-icon">&#xe642;</i>
+							</button>
+						</c:if>
 					</div>
 					${article.content}
 				</div>
@@ -79,10 +83,16 @@ pre.prettyprint{
 	</div>
 	<%@ include file="template/fixbar.jsp"%>
 	<script type="text/javascript">
-	layui.use(['laypage','element'], function() {
-		var laypage = layui.laypage;
-		var element = layui.element;
-	});
+		layui.use([ 'laypage', 'element', 'layer' ], function() {
+			var laypage = layui.laypage;
+			var element = layui.element;
+			var layer = layui.layer;
+			layer.photos({
+				photos : '.light',
+				anim : 5
+			//0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
+			});
+		});
 	</script>
 </body>
 </html>
