@@ -23,6 +23,13 @@
 		width: 850px;
 	}
 }
+pre {
+	white-space: pre-wrap;
+	word-wrap: break-word;
+}
+pre.prettyprint{
+	white-space: pre-wrap;
+}
 </style>
 </head>
 

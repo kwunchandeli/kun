@@ -106,33 +106,53 @@
 	<%@ include file="template/fixbar.jsp"%>
 	<script charset="utf-8" src="js/kindeditor/kindeditor-all.js"></script>
 	<script charset="utf-8" src="js/kindeditor/lang/zh-CN.js"></script>
+	<script charset="utf-8" src="js/kindeditor/plugins/fixtoolbar/fixtoolbar.js"></script>
 	<script src="js/jquery-3.2.1.min.js"></script>
 	<script>
-		KindEditor.ready(function(K) {
-			var options = {
-				height : '600px',
-				filterMode : true,
-				items: [
-						        'source', '|', 'undo', 'redo', '|', 'preview', 'print', 'template', 'code', 'cut', 'copy', 'paste',
-						        'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
-						        'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
-						        'superscript', 'clearhtml', 'quickformat', 'selectall', '|', 'fullscreen', '/',
-						        'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
-						        'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image', 
-						        'table', 'hr', 'emoticons', 'pagebreak', 'link', 'unlink', '|', 'about'
-						],
-				//cssPath: '/TestingZone/css/editor.css'
-				cssPath: '/TestingZone/js/kindeditor/plugins/code/prettify.css'
-			};
-			window.editor = K.create('#editor_id', options);
-		});
+		KindEditor
+				.ready(function(K) {
+					var options = {
+						height : '600px',
+						filterMode : true,
+						items : [ 'source', '|', 'undo', 'redo', '|',
+								'preview', 'print', 'template', 'code', 'cut',
+								'copy', 'paste', 'plainpaste', 'wordpaste',
+								'|', 'justifyleft', 'justifycenter',
+								'justifyright', 'justifyfull',
+								'insertorderedlist', 'insertunorderedlist',
+								'indent', 'outdent', 'subscript',
+								'superscript', 'clearhtml', 'quickformat',
+								'selectall', '|', 'fullscreen', '/',
+								'formatblock', 'fontname', 'fontsize', '|',
+								'forecolor', 'hilitecolor', 'bold', 'italic',
+								'underline', 'strikethrough', 'lineheight',
+								'removeformat', '|', 'image', 'table', 'hr',
+								'emoticons', 'pagebreak', 'link', 'unlink',
+								'|', 'about' ],
+						//cssPath: '/TestingZone/css/editor.css'
+						cssPath : '<%=request.getContextPath()%>/js/kindeditor/plugins/code/prettify.css',
+						uploadJson : 'upload/image',
+						afterUpload : function(url) {
+                        	console.log(url);
+                        	
+                		},
+                		afterSelectFile: function(){
+                			console.log('select');
+                		},
+                		allowFileManager : true,
+                		fixToolBar : true
+					};
+					
+					window.editor = K.create('#editor_id', options);
+					
+				});
 
-		layui.use(['form','element'], function() {
+		layui.use([ 'form', 'element' ], function() {
 			var form = layui.form;
 			var element = layui.element;
 			form.on('submit(go)', function(data) {
 				editor.sync();
-				data.field.content =$("#editor_id").val();
+				data.field.content = $("#editor_id").val();
 				console.log(data.field); //当前容器的全部表单字段，名值对形式：{name: value}
 				layer.confirm('确认保存?', {
 					icon : 3,
@@ -143,14 +163,16 @@
 						type : "POST",
 						url : "save/article",
 						dataType : "json",
-						contentType: "application/json",
+						contentType : "application/json",
 						//data: data.field,
 						data : JSON.stringify(data.field),
 						success : function(result) {
 							console.log(result);
 							if (result.status == "0") {
 								$("#a_id").val(result.id);
-								layer.msg('保存成功！', {icon: 1});
+								layer.msg('保存成功！', {
+									icon : 1
+								});
 							}
 						}
 					});
