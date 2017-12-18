@@ -24,8 +24,9 @@ body {
 }
 
 .nav_logo {
-	text-align: center;;
+	text-align: center;
 	line-height: 60px;
+	padding-top: 4px;
 }
 
 .content {
