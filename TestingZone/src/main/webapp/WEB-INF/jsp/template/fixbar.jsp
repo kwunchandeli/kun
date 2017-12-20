@@ -3,6 +3,7 @@
 
 <!-- <script src="js/jquery-3.2.1.min.js"></script> -->
 <script src="js/layui/layui.js"></script>
+<script src="js/iconfont.js"></script>
 
 <script type="text/javascript">
 

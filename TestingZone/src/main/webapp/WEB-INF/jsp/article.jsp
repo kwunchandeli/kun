@@ -19,11 +19,11 @@
 <link rel="stylesheet" type="text/css"
 	href="js/kindeditor/plugins/code/prettify.css" />
 <style>
-@media screen and (min-width: 900px) {
+/* @media screen and (min-width: 900px) {
 	.layui-container {
 		width: 850px;
 	}
-}
+} */
 
 pre {
 	white-space: pre-wrap;
