@@ -1,0 +1,983 @@
+diff --git a/TestingZone/pom.xml b/TestingZone/pom.xml
+index eaca010..f4bc8cd 100644
+--- a/TestingZone/pom.xml
++++ b/TestingZone/pom.xml
+@@ -14,6 +14,11 @@
+ 		<!-- mybatis版本�? -->
+ 		<mybatis.version>3.4.5</mybatis.version>
+ 	</properties>
++	
++	<scm>
++		<connection>scm:git:git@168.168.78.89:/data/git/app.git</connection>
++	</scm>
++	
+ 	<dependencies>
+ 		<dependency>
+ 			<groupId>javax</groupId>
+@@ -239,6 +244,15 @@
+ 			</plugin>
+ 		</plugins>
+ 	</build>
++	<reporting>
++		<plugins>
++			<plugin>
++				<groupId>org.apache.maven.plugins</groupId>
++				<artifactId>maven-changelog-plugin</artifactId>
++				<version>2.3</version>
++			</plugin>
++		</plugins>
++	</reporting>
+ 	<profiles>
+ 		<profile>
+ 			<id>dev</id>
+diff --git a/TestingZone/src/main/webapp/WEB-INF/jsp/test.jsp b/TestingZone/src/main/webapp/WEB-INF/jsp/test.jsp
+new file mode 100644
+index 0000000..1d15764
+--- /dev/null
++++ b/TestingZone/src/main/webapp/WEB-INF/jsp/test.jsp
+@@ -0,0 +1,28 @@
++<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
++<%
++String path = request.getContextPath();
++String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
++%>
++
++<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
++<html>
++  <head>
++    <base href="<%=basePath%>">
++    
++    <title>My JSP 'MyJsp.jsp' starting page</title>
++    
++	<meta http-equiv="pragma" content="no-cache">
++	<meta http-equiv="cache-control" content="no-cache">
++	<meta http-equiv="expires" content="0">    
++	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
++	<meta http-equiv="description" content="This is my page">
++	<!--
++	<link rel="stylesheet" type="text/css" href="styles.css">
++	-->
++
++  </head>
++  
++  <body>
++    This is my JSP page. <br>1216
++  </body>
++</html>
+diff --git a/TestingZone/src/main/webapp/WEB-INF/jsp/test1.jsp b/TestingZone/src/main/webapp/WEB-INF/jsp/test1.jsp
+new file mode 100644
+index 0000000..20f7c61
+--- /dev/null
++++ b/TestingZone/src/main/webapp/WEB-INF/jsp/test1.jsp
+@@ -0,0 +1,28 @@
++<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
++<%
++String path = request.getContextPath();
++String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
++%>
++
++<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
++<html>
++  <head>
++    <base href="<%=basePath%>">
++    
++    <title>My JSP 'MyJsp.jsp' starting page</title>
++    
++	<meta http-equiv="pragma" content="no-cache">
++	<meta http-equiv="cache-control" content="no-cache">
++	<meta http-equiv="expires" content="0">    
++	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
++	<meta http-equiv="description" content="This is my page">
++	<!--
++	<link rel="stylesheet" type="text/css" href="styles.css">
++	-->
++
++  </head>
++  
++  <body>
++    This is my JSP page.1111 <br>
++  </body>
++</html>
+diff --git a/TestingZone/src/test/java/com/tot/tz/controller/TestLog.java b/TestingZone/src/test/java/com/tot/tz/controller/TestLog.java
+new file mode 100644
+index 0000000..d1291f5
+--- /dev/null
++++ b/TestingZone/src/test/java/com/tot/tz/controller/TestLog.java
+@@ -0,0 +1,92 @@
++package com.tot.tz.controller;
++
++import java.util.List;
++import java.util.Map;
++import java.util.UUID;
++
++import javax.annotation.Resource;
++import javax.json.Json;
++
++import org.apache.logging.log4j.LogManager;
++import org.apache.logging.log4j.Logger;
++import org.junit.Test;
++import org.junit.runner.RunWith;
++import org.springframework.test.context.ContextConfiguration;
++import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
++
++import com.alibaba.fastjson.JSON;
++import com.tot.tz.entity.Article;
++import com.tot.tz.entity.Plate;
++import com.tot.tz.entity.User;
++import com.tot.tz.service.ArticleService;
++import com.tot.tz.service.PlateService;
++import com.tot.tz.service.UserService;;
++
++@RunWith(SpringJUnit4ClassRunner.class)     //表示继承了SpringJUnit4ClassRunner�?  
++@ContextConfiguration(locations = {"classpath:spring-mybatis.xml"})
++public class TestLog {
++
++	private static Logger logger = LogManager.getLogger(TestLog.class.getName());
++	
++	
++	@Resource  
++    private UserService userService = null;
++	@Resource 
++	private PlateService plateService;
++	@Resource 
++	private ArticleService articleService;
++	
++	@Test
++	public void log(){
++		// 记录debug级别的信�?  
++        logger.debug("This is debug message.");  
++        // 记录info级别的信�?  
++        logger.info("This is info message.");  
++        // 记录error级别的信�?  
++        logger.error("This is error message."); 
++	}
++	
++	@Test  
++    public void test1() {  
++        User user = userService.getUserByIp("168.168.68.88");  
++        logger.info("值："+user.getU_name());  
++    }  
++	
++	@Test  
++    public void test2() {  
++        List<Plate> pList = plateService.getPlateList();
++        logger.info(JSON.toJSONString(pList));  
++    }
++	
++	@Test  
++    public void test3() {  
++		List<Article> aList = articleService.getHotArticles();
++        logger.info(JSON.toJSONString(aList));  
++    }
++	
++	@Test  
++    public void test4() {  
++		Map<String, Object> map = articleService.getPagingArticles(0, 10, 4);
++        logger.info(JSON.toJSONString(map));  
++    }
++	
++	@Test  
++    public void test5() {  
++		Article a = articleService.getArticleById(1);
++        logger.info(JSON.toJSONString(a));  
++    }
++	
++	@Test  
++    public void test6() {  
++		
++		for(int i=0;i<10;i++){
++			String aString = UUID.randomUUID().toString();
++			System.out.println(aString);
++		}
++    }
++	
++	@Test  
++    public void test7() {  
++		
++    }
++}
+diff --git a/testmvn/.classpath b/testmvn/.classpath
+index 8f8d52a..8ee0349 100644
+--- a/testmvn/.classpath
++++ b/testmvn/.classpath
+@@ -14,16 +14,12 @@
+ 		</attributes>
+ 	</classpathentry>
+ 	<classpathentry including="**/*.java" kind="src" output="target/test-classes" path="src/test/resources"/>
+-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7">
+-		<attributes>
+-			<attribute name="maven.pomderived" value="true"/>
+-		</attributes>
+-	</classpathentry>
+ 	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
+ 		<attributes>
+ 			<attribute name="maven.pomderived" value="true"/>
+ 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+ 		</attributes>
+ 	</classpathentry>
++	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.8.0_144"/>
+ 	<classpathentry kind="output" path="target/classes"/>
+ </classpath>
+diff --git a/testmvn/.settings/org.eclipse.jdt.core.prefs b/testmvn/.settings/org.eclipse.jdt.core.prefs
+index c788ee3..529ef07 100644
+--- a/testmvn/.settings/org.eclipse.jdt.core.prefs
++++ b/testmvn/.settings/org.eclipse.jdt.core.prefs
+@@ -1,8 +1,13 @@
+ eclipse.preferences.version=1
+ org.eclipse.jdt.core.compiler.codegen.inlineJsrBytecode=enabled
+-org.eclipse.jdt.core.compiler.codegen.targetPlatform=1.7
+-org.eclipse.jdt.core.compiler.compliance=1.7
++org.eclipse.jdt.core.compiler.codegen.methodParameters=do not generate
++org.eclipse.jdt.core.compiler.codegen.targetPlatform=1.8
++org.eclipse.jdt.core.compiler.codegen.unusedLocal=preserve
++org.eclipse.jdt.core.compiler.compliance=1.8
++org.eclipse.jdt.core.compiler.debug.lineNumber=generate
++org.eclipse.jdt.core.compiler.debug.localVariable=generate
++org.eclipse.jdt.core.compiler.debug.sourceFile=generate
+ org.eclipse.jdt.core.compiler.problem.assertIdentifier=error
+ org.eclipse.jdt.core.compiler.problem.enumIdentifier=error
+ org.eclipse.jdt.core.compiler.problem.forbiddenReference=warning
+-org.eclipse.jdt.core.compiler.source=1.7
++org.eclipse.jdt.core.compiler.source=1.8
+diff --git a/testmvn/.settings/org.eclipse.wst.common.project.facet.core.xml b/testmvn/.settings/org.eclipse.wst.common.project.facet.core.xml
+index 0c1ab8a..ead0b90 100644
+--- a/testmvn/.settings/org.eclipse.wst.common.project.facet.core.xml
++++ b/testmvn/.settings/org.eclipse.wst.common.project.facet.core.xml
+@@ -4,7 +4,7 @@
+   <fixed facet="jst.web"/>
+   <fixed facet="java"/>
+   <fixed facet="wst.jsdt.web"/>
+-  <installed facet="java" version="1.7"/>
++  <installed facet="java" version="1.8"/>
+   <installed facet="jst.web" version="3.1"/>
+   <installed facet="jst.web.jstl" version="1.2.2"/>
+   <installed facet="maven" version="1.0"/>
+diff --git a/testmvn/geckodriver-v0.19.1-linux64.tar.gz b/testmvn/geckodriver-v0.19.1-linux64.tar.gz
+new file mode 100644
+index 0000000..5f44e5e
+--- /dev/null
++++ b/testmvn/geckodriver-v0.19.1-linux64.tar.gz
+Binary files differ
+diff --git a/testmvn/pom.xml b/testmvn/pom.xml
+index e91a451..f617eb2 100644
+--- a/testmvn/pom.xml
++++ b/testmvn/pom.xml
+@@ -1,51 +1,140 @@
+-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+-  <modelVersion>4.0.0</modelVersion>
+-  <groupId>com.ck</groupId>
+-  <artifactId>testmvn</artifactId>
+-  <version>0.0.1-SNAPSHOT</version>
+-  <packaging>war</packaging>
+-  <name>testmvn</name>
+-  <description/>
+-  <properties>
+-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+-  </properties>
+-  <dependencies>
+-        <dependency>
+-            <groupId>javax.servlet</groupId>
+-            <artifactId>javax.servlet-api</artifactId>
+-            <version>3.0.1</version>
+-        </dependency>
+-        <dependency>
+-            <groupId>javax.servlet</groupId>
+-            <artifactId>jstl</artifactId>
+-            <version>1.2</version>
+-        </dependency>
++<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
++	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
++	<modelVersion>4.0.0</modelVersion>
++	<groupId>com.ck</groupId>
++	<artifactId>testmvn</artifactId>
++	<version>0.0.1-SNAPSHOT</version>
++	<packaging>war</packaging>
++	<name>testmvn</name>
++	<description />
++	<properties>
++		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
++	</properties>
++
++	<scm>
++		<connection>scm:git:git@168.168.78.89:/data/git/app.git</connection>
++		<developerConnection>scm:git:git@168.168.78.89:/data/git/app.git</developerConnection>
++		<url>http://168.168.78.89/gitweb/app.git/</url>
++	</scm>
++
++	<dependencies>
+ 		<dependency>
+-		    <groupId>junit</groupId>
+-		    <artifactId>junit</artifactId>
+-		    <version>4.4</version>
+-		    <scope>test</scope>
++			<groupId>javax.servlet</groupId>
++			<artifactId>javax.servlet-api</artifactId>
++			<version>3.0.1</version>
+ 		</dependency>
+-  </dependencies>
+-  <build>
+-    <finalName>testmvn</finalName>
+-    <plugins>
+-      <plugin>
+-        <artifactId>maven-compiler-plugin</artifactId>
+-        <version>2.3.2</version>
+-        <configuration>
+-          <source>1.7</source>
+-          <target>1.7</target>
+-        </configuration>
+-      </plugin>
+-      <plugin>
+-        <artifactId>maven-war-plugin</artifactId>
+-        <version>2.2</version>
+-        <configuration>
+-          <version>3.1</version>
+-          <failOnMissingWebXml>false</failOnMissingWebXml>
+-        </configuration>
+-      </plugin>
+-    </plugins>
+-  </build>
++		<dependency>
++			<groupId>javax.servlet</groupId>
++			<artifactId>jstl</artifactId>
++			<version>1.2</version>
++		</dependency>
++		<dependency>
++			<groupId>junit</groupId>
++			<artifactId>junit</artifactId>
++			<version>4.4</version>
++			<scope>test</scope>
++		</dependency>
++		<dependency>
++			<groupId>org.seleniumhq.selenium</groupId>
++			<artifactId>selenium-java</artifactId>
++			<version>3.8.1</version>
++		</dependency>
++
++	</dependencies>
++	<build>
++		<finalName>testmvn</finalName>
++		<extensions>
++			<extension>
++				<groupId>org.apache.maven.scm</groupId>
++				<artifactId>maven-scm-provider-jgit</artifactId>
++				<version>1.9.5</version>
++			</extension>
++		</extensions>
++		<plugins>
++			<plugin>
++				<artifactId>maven-compiler-plugin</artifactId>
++				<version>2.3.2</version>
++				<configuration>
++					<source>1.7</source>
++					<target>1.7</target>
++				</configuration>
++			</plugin>
++			<plugin>
++				<artifactId>maven-war-plugin</artifactId>
++				<version>2.2</version>
++				<configuration>
++					<version>3.1</version>
++					<failOnMissingWebXml>false</failOnMissingWebXml>
++				</configuration>
++			</plugin>
++			<plugin>
++				<groupId>org.apache.maven.plugins</groupId>
++				<artifactId>maven-scm-plugin</artifactId>
++				<version>1.9.5</version>
++				<configuration>
++					<providerImplementations>
++						<git>jgit</git>
++					</providerImplementations>
++				</configuration>
++				<dependencies>
++					<dependency>
++						<groupId>org.apache.maven.scm</groupId>
++						<artifactId>maven-scm-provider-jgit</artifactId>
++						<version>1.9.5</version>
++					</dependency>
++				</dependencies>
++			</plugin>
++			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-scm-plugin</artifactId> 
++				<version>1.9.5</version> <configuration> <startDate>2017-09-01</startDate> 
++				<endDate>2017-12-17</endDate> <connectionType>connection</connectionType> 
++				</configuration> </plugin> -->
++			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-changelog-plugin</artifactId> 
++				<version>2.3</version> <dependencies> <dependency> <groupId>org.apache.maven.scm</groupId> 
++				<artifactId>maven-scm-provider-jgit</artifactId> <version>1.9.5</version> 
++				</dependency> </dependencies> </plugin> <plugin> <artifactId>maven-site-plugin</artifactId> 
++				<version>3.3</version> <configuration> <reportPlugins> <plugin> <groupId>org.apache.maven.plugins</groupId> 
++				<artifactId>maven-changelog-plugin</artifactId> <configuration> <providerImplementations> 
++				<git>jgit</git> </providerImplementations> </configuration> </plugin> </reportPlugins> 
++				</configuration> </plugin> <plugin> <groupId>org.apache.maven.plugins</groupId> 
++				<artifactId>maven-changelog-plugin</artifactId> <version>2.3</version> <configuration> 
++				<type>date</type> <dates> <date implementation="java.lang.String">2017-08-01</date> 
++				<date implementation="java.lang.String">2017-12-25</date> </dates> <dateFormat>yyyy-MM-dd</dateFormat> 
++				<providerImplementations> <git>jgit</git> </providerImplementations> </configuration> 
++				<dependencies> <dependency> <groupId>org.apache.maven.scm</groupId> <artifactId>maven-scm-provider-jgit</artifactId> 
++				<version>1.9.5</version> </dependency> </dependencies> </plugin> -->
++
++			<plugin>
++				<groupId>org.apache.maven.plugins</groupId>
++				<artifactId>maven-changelog-plugin</artifactId>
++				<version>2.3</version>
++				<dependencies>
++					<dependency>
++						<groupId>org.apache.maven.scm</groupId>
++						<artifactId>maven-scm-provider-jgit</artifactId>
++						<version>1.9.5</version>
++					</dependency>
++				</dependencies>
++			</plugin>
++		</plugins>
++	</build>
++	<reporting>
++		<plugins>
++			<plugin>
++				<groupId>org.apache.maven.plugins</groupId>
++				<artifactId>maven-changelog-plugin</artifactId>
++				<version>2.3</version>
++				<configuration>
++					<type>date</type>
++					<dates>
++						<date implementation="java.lang.String">2017-08-01</date>
++						<date implementation="java.lang.String">2017-12-25</date>
++					</dates>
++					<dateFormat>yyyy-MM-dd</dateFormat>
++					<providerImplementations>
++						<git>jgit</git>
++					</providerImplementations>
++				</configuration>
++			</plugin>
++		</plugins>
++	</reporting>
+ </project>
+\ No newline at end of file
+diff --git a/testmvn/pom.xml.bak b/testmvn/pom.xml.bak
+new file mode 100644
+index 0000000..728d091
+--- /dev/null
++++ b/testmvn/pom.xml.bak
+@@ -0,0 +1,133 @@
++<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
++	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
++	<modelVersion>4.0.0</modelVersion>
++	<groupId>com.ck</groupId>
++	<artifactId>testmvn</artifactId>
++	<version>0.0.1-SNAPSHOT</version>
++	<packaging>war</packaging>
++	<name>testmvn</name>
++	<description />
++	<properties>
++		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
++	</properties>
++
++	<scm>
++		<connection>scm:git:git@168.168.78.89:/data/git/app.git</connection>
++		<developerConnection>scm:git:git@168.168.78.89:/data/git/app.git</developerConnection>
++		<url>http://168.168.78.89/gitweb/app.git/</url>
++	</scm>
++
++	<dependencies>
++		<dependency>
++			<groupId>javax.servlet</groupId>
++			<artifactId>javax.servlet-api</artifactId>
++			<version>3.0.1</version>
++		</dependency>
++		<dependency>
++			<groupId>javax.servlet</groupId>
++			<artifactId>jstl</artifactId>
++			<version>1.2</version>
++		</dependency>
++		<dependency>
++			<groupId>junit</groupId>
++			<artifactId>junit</artifactId>
++			<version>4.4</version>
++			<scope>test</scope>
++		</dependency>
++		<dependency>
++			<groupId>org.seleniumhq.selenium</groupId>
++			<artifactId>selenium-java</artifactId>
++			<version>3.8.1</version>
++		</dependency>
++
++	</dependencies>
++	<build>
++		<finalName>testmvn</finalName>
++		<plugins>
++			<plugin>
++				<artifactId>maven-compiler-plugin</artifactId>
++				<version>2.3.2</version>
++				<configuration>
++					<source>1.7</source>
++					<target>1.7</target>
++				</configuration>
++			</plugin>
++			<plugin>
++				<artifactId>maven-war-plugin</artifactId>
++				<version>2.2</version>
++				<configuration>
++					<version>3.1</version>
++					<failOnMissingWebXml>false</failOnMissingWebXml>
++				</configuration>
++			</plugin>
++<!-- 			<plugin>
++				<groupId>org.apache.maven.plugins</groupId>
++				<artifactId>maven-scm-plugin</artifactId>
++				<version>1.9.5</version>
++				<configuration>
++					<startDate>2017-09-01</startDate>
++					<endDate>2017-12-17</endDate>
++					<connectionType>connection</connectionType>
++				</configuration>
++			</plugin> -->
++			<plugin>
++				<groupId>org.apache.maven.plugins</groupId>
++				<artifactId>maven-changelog-plugin</artifactId>
++				<version>2.3</version>
++				<dependencies>
++					<dependency>
++						<groupId>org.apache.maven.scm</groupId>
++						<artifactId>maven-scm-provider-jgit</artifactId>
++						<version>1.9.5</version>
++					</dependency>
++				</dependencies>
++			</plugin>
++			<plugin>
++				<artifactId>maven-site-plugin</artifactId>
++				<version>3.3</version>
++				<configuration>
++					<reportPlugins>
++						<plugin>
++							<groupId>org.apache.maven.plugins</groupId>
++							<artifactId>maven-changelog-plugin</artifactId>
++							<configuration>
++								<providerImplementations>
++									<git>jgit</git>
++								</providerImplementations>
++							</configuration>
++						</plugin>
++					</reportPlugins>
++				</configuration>
++			</plugin>
++			<!-- <plugin>
++				<groupId>org.apache.maven.plugins</groupId>
++				<artifactId>maven-changelog-plugin</artifactId>
++				<version>2.3</version>
++				<configuration>
++					<type>date</type>
++					<dates>
++						<date implementation="java.lang.String">2017-08-01</date>
++						<date implementation="java.lang.String">2017-12-25</date>
++					</dates>
++					<dateFormat>yyyy-MM-dd</dateFormat>
++					<providerImplementations>
++						<git>jgit</git>
++					</providerImplementations>
++				</configuration>
++				<dependencies>
++					<dependency>
++						<groupId>org.apache.maven.scm</groupId>
++						<artifactId>maven-scm-provider-jgit</artifactId>
++						<version>1.9.5</version>
++					</dependency>
++				</dependencies>
++			</plugin> -->
++		</plugins>
++	</build>
++	<!-- <reporting> <plugins> <plugin> <groupId>org.apache.maven.plugins</groupId> 
++		<artifactId>maven-changelog-plugin</artifactId> <version>2.3</version> <configuration> 
++		<type>date</type> <dates> <date implementation="java.lang.String">2017-08-01</date> 
++		<date implementation="java.lang.String">2017-12-25</date> </dates> <dateFormat>yyyy-MM-dd</dateFormat> 
++		<providerImplementations> <git>jgit</git> </providerImplementations> </configuration> 
++		</plugin> </plugins> </reporting> -->
++</project>
+\ No newline at end of file
+diff --git a/testmvn/result.txt b/testmvn/result.txt
+new file mode 100644
+index 0000000..fa01d58
+--- /dev/null
++++ b/testmvn/result.txt
+@@ -0,0 +1,5 @@
++2017-12-19 10:52:51 0
++2017-12-19 10:56:07 1
++2017-12-19 11:06:21 0
++2017-12-19 11:24:57 0
++2017-12-19 11:26:51 0
+\ No newline at end of file
+diff --git a/testmvn/src/main/java/com/kun/deploy/Deploy.java b/testmvn/src/main/java/com/kun/deploy/Deploy.java
+new file mode 100644
+index 0000000..4ff8cad
+--- /dev/null
++++ b/testmvn/src/main/java/com/kun/deploy/Deploy.java
+@@ -0,0 +1,269 @@
++package com.kun.deploy;
++
++import java.io.File;
++import java.util.List;
++import java.util.concurrent.TimeUnit;
++import com.kun.deploy.DeployResult;
++
++import org.openqa.selenium.By;
++import org.openqa.selenium.NoSuchElementException;
++import org.openqa.selenium.WebDriver;
++import org.openqa.selenium.WebElement;
++import org.openqa.selenium.chrome.ChromeDriver;
++import org.openqa.selenium.firefox.FirefoxDriver;
++import org.openqa.selenium.support.ui.ExpectedCondition;
++import org.openqa.selenium.support.ui.WebDriverWait;
++
++public class Deploy {
++
++	Deploy() {
++		super();
++		System.out.println("实例化部署对�?");
++	}
++
++	public void dodeploy(String projectname) throws InterruptedException {
++		System.out.println("�?始进行更�?");
++		// File file = new File("E:/chromedriver.exe");
++		// System.setProperty("webdriver.chrome.driver",
++		// file.getAbsolutePath());
++		// WebDriver driver = new ChromeDriver();
++		// File file = new File("E:/geckodriver.exe");
++		File file = new File("geckodriver");
++		System.setProperty("webdriver.gecko.driver", file.getAbsolutePath());
++		WebDriver driver = new FirefoxDriver();
++
++		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);// 识别元素时的超时时间
++		// driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);//
++		// 页面加载时的超时时间
++		// driver.manage().timeouts().setScriptTimeout(10, TimeUnit.SECONDS);//
++		// 异步脚本的超时时�?
++
++		driver.get("http://168.168.68.88:7001/console/login/LoginForm.jsp");
++		driver.manage().window().maximize();
++		Thread.sleep(2000);
++		WebElement uElement = driver.findElement(By.id("j_username"));
++		uElement.sendKeys("chenkun");
++		driver.findElement(By.id("j_password")).sendKeys("Chen#1101");
++		uElement.submit();
++		Thread.sleep(5000);
++		// 若锁定并编辑按钮可以被点击，则先点击此按�?
++		WebElement editElement = driver.findElement(By
++				.xpath("//button[@name='save']"));
++		if (editElement.isEnabled()) {
++			editElement.click();
++		}
++		driver.findElement(By.linkText("部署")).click();
++		Thread.sleep(3000);
++		/*
++		 * // 定位应用�?在的table WebElement dElement = driver
++		 * .findElement(By.id("genericTableFormtable")); // 按行找到�?有部署的项目
++		 * List<WebElement> trElements =
++		 * dElement.findElements(By.tagName("tr"));
++		 * System.out.println(trElements.size()); // 定义临时变量 WebElement
++		 * tempElement = null; WebElement pElement = null; //
++		 * 循环每一行的数据，从中查找出部署的应用所在的tr元素 for (WebElement tr : trElements) { //
++		 * System.out.println(tr.getSize()); System.out.println(tr.getText());
++		 * // 根据tr元素中是否含有应用的名称来确定需要更新的应用 if (tr.getText().contains(projectname))
++		 * { // 若找到所�?要更新的应用，则将此tr的第�?个td赋�?�给临时变量 tempElement =
++		 * tr.findElement(By.tagName("td")); System.out.println("查询到需要更新的应用�?");
++		 * 
++		 * // 查找到td中的单�?�框 pElement =
++		 * tr.findElement(By.className("radioAndCheckbox")); // 选中单�?�框
++		 * pElement.click(); break; } }
++		 */
++		this.clickRadio(driver, projectname);
++		Thread.sleep(2000);
++
++		// 点击更新按钮
++		driver.findElement(By.xpath("//button[@name='更新']")).click();
++		Thread.sleep(3000);
++		// 点击完成按钮
++		driver.findElement(By.xpath("//button[@name='完成']")).click();
++		Thread.sleep(2000);
++		// 等待�?活更改按钮可以被点击后点击激活更�?
++		WebDriverWait wait = new WebDriverWait(driver, 50);
++		wait.until(new ExpectedCondition<WebElement>() {
++			@Override
++			public WebElement apply(WebDriver d) {
++				return d.findElement(By
++						.xpath("//button[@name='save'][@class='formButton']"));
++			}
++		}).click();
++		// 根据提示消息判断更新包是否正�?
++		List<WebElement> mesageSpan = driver.findElements(By
++				.className("message_SUCCESS"));
++		// 如果成功消息数量�?0，则更新包错�?
++		// 更新完成之后，将更新结果写入到文件中
++		System.out.println(mesageSpan.size());
++		if (mesageSpan.isEmpty()) {
++			System.out.println("有错误，更新失败�?");
++			DeployResult.saveResult(1);
++			// 停止更新失败的应�?
++			for (int i = 0; i < 2; i++) {
++				// 选择更新失败的应�?
++				this.clickRadio(driver, projectname);
++				// 点击停止
++				driver.findElement(By.xpath("//button[@name='停止']")).click();
++				// 点击立即强制停止链接
++				driver.findElement(By.linkText("立即强制停止")).click();
++			}
++
++		} else {
++			DeployResult.saveResult(0);
++			System.out.println("更新成功�?");
++		}
++		// 如果是更新失败回滚后重新进行部署，则启动此状态为”准备就绪�?�的应用
++		if (this.clickRadio(driver, "准备就绪")) {
++			// 点击启动按钮
++			driver.findElement(By.xpath("//button[@name='启动']")).click();
++			// 点击为所有请求提供服务链�?
++			driver.findElement(By.linkText("为所有请求提供服�?")).click();
++			// 点击是按�?
++			driver.findElement(By.xpath("//button[@name='�?']")).click();
++		}
++		Thread.sleep(3000);
++		// driver.close();
++		driver.quit();
++	}
++
++	public void dodeployByExecCommand(String projectname)
++			throws InterruptedException {
++		System.out.println("�?始进行更�?");
++		// File file = new File("E:/chromedriver.exe");
++		// System.setProperty("webdriver.chrome.driver",
++		// file.getAbsolutePath());
++		// WebDriver driver = new ChromeDriver();
++		File file = new File("E:/geckodriver.exe");
++		//File file = new File("geckodriver");
++		System.setProperty("webdriver.gecko.driver", file.getAbsolutePath());
++		WebDriver driver = new FirefoxDriver();
++
++		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);// 识别元素时的超时时间
++		// driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);//
++		// 页面加载时的超时时间
++		// driver.manage().timeouts().setScriptTimeout(10, TimeUnit.SECONDS);//
++		// 异步脚本的超时时�?
++
++		driver.get("http://168.168.68.88:7001/console/login/LoginForm.jsp");
++		driver.manage().window().maximize();
++		Thread.sleep(2000);
++		WebElement uElement = driver.findElement(By.id("j_username"));
++		uElement.sendKeys("chenkun");
++		driver.findElement(By.id("j_password")).sendKeys("Chen#1101");
++		uElement.submit();
++		Thread.sleep(5000);
++		// 若锁定并编辑按钮可以被点击，则先点击此按�?
++		WebElement editElement = driver.findElement(By
++				.xpath("//button[@name='save']"));
++		if (editElement.isEnabled()) {
++			editElement.click();
++		}
++		driver.findElement(By.linkText("部署")).click();
++		Thread.sleep(3000);
++		/*
++		 * // 定位应用�?在的table WebElement dElement = driver
++		 * .findElement(By.id("genericTableFormtable")); // 按行找到�?有部署的项目
++		 * List<WebElement> trElements =
++		 * dElement.findElements(By.tagName("tr"));
++		 * System.out.println(trElements.size()); // 定义临时变量 WebElement
++		 * tempElement = null; WebElement pElement = null; //
++		 * 循环每一行的数据，从中查找出部署的应用所在的tr元素 for (WebElement tr : trElements) { //
++		 * System.out.println(tr.getSize()); System.out.println(tr.getText());
++		 * // 根据tr元素中是否含有应用的名称来确定需要更新的应用 if (tr.getText().contains(projectname))
++		 * { // 若找到所�?要更新的应用，则将此tr的第�?个td赋�?�给临时变量 tempElement =
++		 * tr.findElement(By.tagName("td")); System.out.println("查询到需要更新的应用�?");
++		 * 
++		 * // 查找到td中的单�?�框 pElement =
++		 * tr.findElement(By.className("radioAndCheckbox")); // 选中单�?�框
++		 * pElement.click(); break; } }
++		 */
++		this.clickRadio(driver, projectname);
++		Thread.sleep(2000);
++
++		// 点击更新按钮
++		driver.findElement(By.xpath("//button[@name='更新']")).click();
++		Thread.sleep(3000);
++		// 点击完成按钮
++		driver.findElement(By.xpath("//button[@name='完成']")).click();
++		Thread.sleep(2000);
++		// 等待�?活更改按钮可以被点击后点击激活更�?
++		WebDriverWait wait = new WebDriverWait(driver, 50);
++		wait.until(new ExpectedCondition<WebElement>() {
++			@Override
++			public WebElement apply(WebDriver d) {
++				return d.findElement(By
++						.xpath("//button[@name='save'][@class='formButton']"));
++			}
++		}).click();
++		// 根据提示消息判断更新包是否正�?
++		List<WebElement> mesageSpan = driver.findElements(By
++				.className("message_SUCCESS"));
++		// 如果成功消息数量�?0，则更新包错�?
++		// 更新完成之后，将更新结果写入到文件中
++		System.out.println(mesageSpan.size());
++		if (mesageSpan.isEmpty()) {
++			System.out.println("有错误，更新失败�?");
++			DeployResult.saveResult(1);
++			// 停止更新失败的应�?
++			for (int i = 0; i < 2; i++) {
++				// 选择更新失败的应�?
++				this.clickRadio(driver, projectname);
++				// 点击停止
++				driver.findElement(By.xpath("//button[@name='停止']")).click();
++				// 点击立即强制停止链接
++				driver.findElement(By.linkText("立即强制停止")).click();
++			}
++			//执行回滚操作
++			//Runtime.getRuntime().exec("");
++			//回滚完成后启动应�?
++			this.clickRadio(driver, projectname);
++			// 点击启动按钮
++			driver.findElement(By.xpath("//button[@name='启动']")).click();
++			// 点击为所有请求提供服务链�?
++			driver.findElement(By.linkText("为所有请求提供服�?")).click();
++			// 点击是按�?
++			driver.findElement(By.xpath("//button[@name='�?']")).click();
++		} else {
++			DeployResult.saveResult(0);
++			System.out.println("更新成功�?");
++		}
++		
++		Thread.sleep(3000);
++		// driver.close();
++		driver.quit();
++	}
++
++	public boolean clickRadio(WebDriver driver, String text) {
++		// 定位应用�?在的table
++		WebElement dElement = driver
++				.findElement(By.id("genericTableFormtable"));
++		// 按行找到�?有部署的项目
++		List<WebElement> trElements = dElement.findElements(By.tagName("tr"));
++		System.out.println(trElements.size());
++		// 定义临时变量
++		WebElement tempElement = null;
++		WebElement pElement = null;
++		// 循环每一行的数据，从中查找出部署的应用所在的tr元素
++		for (WebElement tr : trElements) {
++			// System.out.println(tr.getSize());
++			System.out.println(tr.getText());
++			// 根据tr元素中是否含有应用的名称来确定需要更新的应用
++			if (tr.getText().contains(text)) {
++				// 若找到所�?要更新的应用，则将此tr的第�?个td赋�?�给临时变量
++				tempElement = tr.findElement(By.tagName("td"));
++				System.out.println("查询到需要更新的应用�?");
++
++				// 查找到td中的单�?�框
++				pElement = tr.findElement(By.className("radioAndCheckbox"));
++				// 选中单�?�框
++				pElement.click();
++				if (text == "准备就绪") {
++					return true;
++				}
++				break;
++			}
++		}
++		return false;
++	}
++
++}
+diff --git a/testmvn/src/main/java/com/kun/deploy/DeployResult.java b/testmvn/src/main/java/com/kun/deploy/DeployResult.java
+new file mode 100644
+index 0000000..865ab00
+--- /dev/null
++++ b/testmvn/src/main/java/com/kun/deploy/DeployResult.java
+@@ -0,0 +1,47 @@
++package com.kun.deploy;
++
++import java.io.BufferedWriter;
++import java.io.File;
++import java.io.FileWriter;
++import java.io.IOException;
++import java.util.Date;
++
++public class DeployResult {
++
++	public static void saveResult(int result) {
++		String data = (new Date()).toLocaleString() + " " +result;
++		File file = new File("result.txt");
++		FileWriter fWriter =null;
++		if (!file.exists()) {
++			try {
++				file.createNewFile();
++			} catch (IOException e) {
++				// TODO Auto-generated catch block
++				e.printStackTrace();
++			}
++		}
++		try {
++			fWriter = new FileWriter(file.getName(), true);
++			BufferedWriter bufferWritter = new BufferedWriter(fWriter);
++			bufferWritter.newLine();
++            bufferWritter.write(data);
++            bufferWritter.flush();
++            bufferWritter.close();
++            System.out.println("保存结果成功�?");
++		} catch (IOException e) {
++			// TODO Auto-generated catch block
++			System.out.println("保存结果失败�?");
++			e.printStackTrace();
++		}finally{
++			if(fWriter !=null){
++				try {
++					fWriter.close();
++				} catch (IOException e) {
++					// TODO Auto-generated catch block
++					e.printStackTrace();
++				}
++			}
++		}
++	}
++
++}
+diff --git a/testmvn/src/test/java/com/kun/deploy/DeployTest.java b/testmvn/src/test/java/com/kun/deploy/DeployTest.java
+new file mode 100644
+index 0000000..ea702c8
+--- /dev/null
++++ b/testmvn/src/test/java/com/kun/deploy/DeployTest.java
+@@ -0,0 +1,43 @@
++package com.kun.deploy;
++
++import java.io.BufferedReader;
++import java.io.IOException;
++import java.io.InputStreamReader;
++
++import org.junit.Test;
++
++public class DeployTest {
++	
++	@Test
++	public void TestDoDeploy() throws InterruptedException {
++		Deploy dp = new Deploy();
++		dp.dodeploy("test");
++	}
++	
++	@Test
++	public void cmd() {
++		try {
++			//String aString = "cmd /c start cmd.exe /k pwd ";
++			String pathCmd = "cmd /k  cd  F:/webapp/webapp/test";
++			String aString = "cmd /k  git log ";
++			Runtime runtime = Runtime.getRuntime();
++			Process p =runtime.exec( "cmd /k  f:");
++			//Process p1 =runtime.exec("cmd /k  dir ");
++			BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));   
++            String readLine = br.readLine();   
++            while (readLine != null) { 
++                readLine = br.readLine(); 
++                System.out.println(readLine); 
++            } 
++            if(br!=null){ 
++                br.close(); 
++            } 
++            p.destroy(); 
++            p=null;
++		} catch (Exception e) {
++			// TODO Auto-generated catch block
++			e.printStackTrace();
++		}
++	}
++	
++}

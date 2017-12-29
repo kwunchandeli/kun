@@ -1,0 +1,133 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.ck</groupId>
+	<artifactId>testmvn</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+	<name>testmvn</name>
+	<description />
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<scm>
+		<connection>scm:git:git@168.168.78.89:/data/git/app.git</connection>
+		<developerConnection>scm:git:git@168.168.78.89:/data/git/app.git</developerConnection>
+		<url>http://168.168.78.89/gitweb/app.git/</url>
+	</scm>
+
+	<dependencies>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.4</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-java</artifactId>
+			<version>3.8.1</version>
+		</dependency>
+
+	</dependencies>
+	<build>
+		<finalName>testmvn</finalName>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.2</version>
+				<configuration>
+					<version>3.1</version>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+				</configuration>
+			</plugin>
+<!-- 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-scm-plugin</artifactId>
+				<version>1.9.5</version>
+				<configuration>
+					<startDate>2017-09-01</startDate>
+					<endDate>2017-12-17</endDate>
+					<connectionType>connection</connectionType>
+				</configuration>
+			</plugin> -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-changelog-plugin</artifactId>
+				<version>2.3</version>
+				<dependencies>
+					<dependency>
+						<groupId>org.apache.maven.scm</groupId>
+						<artifactId>maven-scm-provider-jgit</artifactId>
+						<version>1.9.5</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+			<plugin>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>3.3</version>
+				<configuration>
+					<reportPlugins>
+						<plugin>
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-changelog-plugin</artifactId>
+							<configuration>
+								<providerImplementations>
+									<git>jgit</git>
+								</providerImplementations>
+							</configuration>
+						</plugin>
+					</reportPlugins>
+				</configuration>
+			</plugin>
+			<!-- <plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-changelog-plugin</artifactId>
+				<version>2.3</version>
+				<configuration>
+					<type>date</type>
+					<dates>
+						<date implementation="java.lang.String">2017-08-01</date>
+						<date implementation="java.lang.String">2017-12-25</date>
+					</dates>
+					<dateFormat>yyyy-MM-dd</dateFormat>
+					<providerImplementations>
+						<git>jgit</git>
+					</providerImplementations>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.apache.maven.scm</groupId>
+						<artifactId>maven-scm-provider-jgit</artifactId>
+						<version>1.9.5</version>
+					</dependency>
+				</dependencies>
+			</plugin> -->
+		</plugins>
+	</build>
+	<!-- <reporting> <plugins> <plugin> <groupId>org.apache.maven.plugins</groupId> 
+		<artifactId>maven-changelog-plugin</artifactId> <version>2.3</version> <configuration> 
+		<type>date</type> <dates> <date implementation="java.lang.String">2017-08-01</date> 
+		<date implementation="java.lang.String">2017-12-25</date> </dates> <dateFormat>yyyy-MM-dd</dateFormat> 
+		<providerImplementations> <git>jgit</git> </providerImplementations> </configuration> 
+		</plugin> </plugins> </reporting> -->
+</project>
